@@ -31,10 +31,10 @@ def render(s):
         elif re.match(r'^#{1,6} ',line):
             level=min(len(line.split(' ')[0])+1,6); out.append(f'<h{level}>'+inline(line.split(' ',1)[1])+f'</h{level}>')
         elif re.match(r'^(- |\d+\. )',line):
-            items=[]
+            items=[]; tag='ol' if re.match(r'^\d+\. ',line) else 'ul'
             while i<len(lines) and re.match(r'^(- |\d+\. )',lines[i].strip()):
                 items.append('<li>'+inline(re.sub(r'^(- |\d+\. )','',lines[i].strip()).replace('[ ] ','□ '))+'</li>'); i+=1
-            out.append('<ul>'+''.join(items)+'</ul>'); continue
+            out.append('<'+tag+'>'+''.join(items)+'</'+tag+'>'); continue
         else: out.append('<p>'+inline(line)+'</p>')
         i+=1
     return '\n'.join(out)
@@ -49,7 +49,29 @@ for match in re.finditer(r'### (P\d+)｜([^\n]+)\n(.*?)(?=\n### P|\n<a id="s7"|\
     core=n in [1,2,6,7,8,10,11,12,13,14,16,18,19,21,22]
     problem=re.search(r'\*\*问题：\*\*\s*([^\n]+)',body)
     papers.append(dict(id=match[1],title=match[2],group=group,core=core,summary=problem[1] if problem else '',meta=body.splitlines()[0],html=render(body)))
-data={'sections':sections,'papers':papers}
+def load_lessons(filename, prefix):
+    text=(root/filename).read_text(encoding='utf-8')
+    lessons={}
+    for m in re.finditer(r'^## ('+prefix+r'\d+)\s*\n(.*?)(?=^## '+prefix+r'\d+|\Z)',text,re.M|re.S):
+        parts=[]
+        for p in re.finditer(r'^### ([^\n]+)\n(.*?)(?=^### |\Z)',m[2],re.M|re.S):
+            parts.append(dict(title=p[1],html=render(p[2])))
+        lessons[m[1]]=parts
+    return text,lessons
+
+paper_md,lessons=load_lessons('paper-lessons.md','P')
+week_md,week_lessons=load_lessons('week-playbook.md','W')
+assert set(lessons)=={p['id'] for p in papers}, '论文精读遗漏'
+assert set(week_lessons)=={f'W{i:02d}' for i in range(1,29)}, '周任务遗漏'
+for p in papers:
+    p['lessons']=lessons[p['id']]
+    assert len(p['lessons'])>=4
+    p['searchText']=' '.join(x['title']+' '+re.sub('<[^>]+>',' ',x['html']) for x in p['lessons'])
+data={'sections':sections,'papers':papers,'weekLessons':week_lessons}
 (root/'dist/content.js').write_text('window.COURSE='+json.dumps(data,ensure_ascii=False)+';',encoding='utf-8')
 (root/'dist/learning-roadmap.md').write_text(md,encoding='utf-8')
+for p in papers:
+    paper_md=paper_md.replace('## '+p['id']+'\n','## '+p['id']+' · '+p['title']+'\n\n'+p['meta']+'\n')
+(root/'dist/paper-lessons.md').write_text(paper_md,encoding='utf-8')
+(root/'dist/week-playbook.md').write_text(week_md,encoding='utf-8')
 print(json.dumps({'sections':len(sections),'papers':len(papers)},ensure_ascii=False))
