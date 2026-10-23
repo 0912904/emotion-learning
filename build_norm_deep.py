@@ -1,0 +1,98 @@
+from pathlib import Path
+import html, json
+
+ROOT=Path(__file__).parent
+parts=[]
+def p(s): parts.append('<p>'+s+'</p>')
+def section(i,t): parts.append(f'<h2 id="{i}">{t}</h2>')
+def eq(s,n,e): parts.append('<div class="equation">$$'+s+'$$<span>'+n+'</span></div>');p(e)
+def table(c,h,rows): parts.append('<div class="table-scroll"><table><caption>'+c+'</caption><thead><tr>'+''.join('<th>'+v+'</th>' for v in h)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+str(v)+'</td>' for v in row)+'</tr>' for row in rows)+'</tbody></table></div>')
+
+section('motivation','01 · 从 ALMT 接着问：输入不可靠时，怎样保持判断？')
+p('先设定一个具体任务：一条视频有文本、音频和视觉三个特征序列，模型预测情感倾向。在 ALMT 中，你已经看到“语言查询辅助模态”；NORM-TR 则先学习一个受干扰较小的公共表示，再让它查询保留细节的表示。读这篇时要抓住两个问题：稳定信息从哪里来？为稳定而丢掉的细节怎样补回来？它们比模块缩写更接近实际设计。')
+p('这里的噪声是与目标无关、可能妨碍预测的信息。背景声、错误人脸轨迹与缺失特征可能属于噪声，但文字和表情不一致并不自动属于噪声。例如反讽中，笑容与负面文字的反差可能就是情绪证据。先确定你的标签是在描述情感倾向、基本情绪还是多标签共存，再决定哪些变化应该被模型忽略。')
+p('现有融合方法可以把三路向量拼接，也可以用张量交互或注意力建立关系。不过，能够交互并不意味着知道哪些信息不可信。原文 Figure 1 对比普通融合与抗噪流程，核心区别在于对表示的训练约束：作者希望先形成相对稳定的查询，再按相关性读取更细的信息。图中的“稳定”是一项目标，需要实验支持，并非网络命名之后就会自动出现。')
+p('困难在于没有现成的逐时间噪声标签。作者用人工擦除时间窗制造一个已知干扰，从而获得训练监督。这样可以确切知道哪些位置被改动，却也引入了一个假设：对人工擦除学到的不变性，能够部分迁移到真实数据中的干扰。这个假设的适用范围，是你以后设计实验时应检验的对象。')
+p('本页依据作者主页公开的 21 页期刊版，已读至参考文献和作者页；arXiv 的摘要与全文 HTML 也已核对。出版商记录是 2024 年12月在线发表、2025 年卷133第3020—3040页，故不要仅按预印本日期把它写成2023年期刊论文。期刊版新增多标签、主干与融合技术等分析，以下图表和公式编号统一指期刊版。')
+parts.append('<blockquote>原文术语短引：<q>noise-aware learning scheme</q>（§3.5）、<q>gradient reversal layer</q>（§3.5.2）、<q>inconsistency and absence</q>（§5）。三者分别对应训练策略、实现手段与标签局限。</blockquote>')
+
+section('basics','02 · 先分清维度、共享参数与对抗学习')
+p('一个特征序列可以写为时间长度 T 乘每个位置的维数 N。T=50 是50个位置，N=128 是每个位置有128个数。统一时间长度不意味着语音、文字与视频已经在物理时间上一一对齐；截断、采样与精确时间对齐是三种不同操作。页中的维度省略 batch，真实程序还要在最前面增加 B。')
+p('共享参数表示三种模态经过同一套权重；独立参数表示每路有自己的权重。共享 MLP 受到共同的训练约束，更容易学习可比较表示，但仅把权重绑在一起并不能保证分布相同。模态输入先被投影到统一宽度，才有条件使用同一 MLP。输入宽度不同却直接共享线性层，会首先遇到矩阵乘法形状错误。')
+p('对抗学习包含两个相反目标：判别器努力从特征里认出某种属性，特征提取器努力让该属性难以辨认，同时还要保留情绪可预测性。这里不生成照片，也不要求网络还原被删掉的原始特征。若只追求判别器认不出，输出常数也可能做到；情绪监督是防止表示失去任务信息的重要约束。')
+
+section('features','03 · 输入到两种表示：稳定性与细节各自负责什么？')
+eq(r"\hat y_E=\operatorname{Trans}\big(F_{NR}(U'),F_M(U')\big)",'原文 Eq.1：总流程','U′ 是受扰动后并投影的输入，F_NR 是公共表示提取器，F_M 是细节表示提取器，Trans 包含融合与预测。直白地说，同一输入分两路加工，再由稳定的一路指导从细节一路取信息。')
+eq(r"U'=g\big(\mathcal V(U,\sigma)\big),\quad U=\{U_a,U_v,U_t\}",'原文 Eq.2：输入处理','U_a、U_v、U_t 分别为音频、视觉、文本预计算特征；σ 表示人工噪声方案，𝒱 是施加操作，g 是三路全连接投影。方法先在特征上施加操作再投影；原始图像加遮挡后重新提特征，是另一个实验协议。')
+p('三路输入各为 T×N_a、T×N_v、T×N_t，投影后各为 T×N。把它们沿位置维排列得到3T×N；这里是把三个序列接成长序列，不是把一个位置扩成3N。二模态 RML 则相应是2T。画数据流时写清连接轴，后面的注意力矩阵与平均池化长度才不会出错。')
+eq(r"F^{NR}=\operatorname{MLP}_{NR}(U';\theta_{NR})\in\mathbb R^{3T\times N/2}",'原文 Eq.3：共享 NRGF','θ_NR 为共享参数。原文使用两层全连接与 Leaky-ReLU，并把宽度从N压为N/2。名称中的“Generic”指通过学习得到跨模态、抗干扰的表示，不是取三路平均，也不是一个人为写好的情绪模板。')
+p('每个位置的 MLP 主要做特征维变换，复杂时间关系由后面的 Transformer 建立。降低宽度可以减少后续成本，但“压缩了”不等于“过滤正确了”。如果非常细的情绪线索也被压掉，任务会受损。这正是作者同时保留另一条分支的理由：以稳定性作为唯一目标，可能丢失有用但模态特有的信息。')
+eq(r"F^M=\operatorname{MLP}_{M}(U';\theta_*)\in\mathbb R^{3T\times N/2},\quad *\in\{a,v,t\}",'原文 Eq.4：三路独立 MF','θ_* 是各模态自己的参数。MF 的层形式与共享分支相似，但三种模态分别学习，并且没有被要求满足同样的抗噪一致性目标。两路形状相同，含义与优化约束不同；形状相同从来不证明信息相同。')
+parts.append('<pre class="mermaid">flowchart TD\n U[Precomputed T A V] --> MASK[Temporal masking]\n MASK --> G[Three projections]\n G --> NR[Shared MLP: NRGF]\n G --> MF[Separate MLPs: MF]\n NR -->|Q| AT[Cross attention]\n MF -->|K and V| AT\n AT --> POOL[Mean pooling and prediction]\n NR --> GRL[Gradient reversal]\n MF --> D1[Modality discriminator]\n GRL --> D1\n GRL --> D2[Noise discriminator]</pre><p class="caption">教学重绘：依据原文 Figure 2、Figure 4 整理数据与训练约束，省略残差、投影及判别前的形状处理；不替代原模型图。</p>')
+
+section('fusion','04 · 为什么让公共表示作 Query？')
+eq(r"\operatorname{Trans}(\cdot)=\operatorname{Trans}(q=F^{NR},k/v=F^M)",'原文 Eq.5：融合方向','q是查询，k是匹配键，v是读出的值。NRGF决定要找什么，MF提供可读取的细节。与ALMT以语言为主要引导不同，这里查询来自三模态公共表示；两者都使用交叉注意力，但查询的形成方式和训练目标不同。')
+eq(r"A=\operatorname{softmax}_{\rm key}\left(\frac{QK^\top}{\sqrt{d_k}}\right),\quad H=AV",'教学展开：Eq.5 中的单头注意力，不是新增原文编号','Q、K、V由对应输入线性投影，d_k为单头键维数；softmax沿键轴逐行归一化。T=50时三模态每路共有150个位置，单头匹配矩阵为150×150；输出位置数由Query决定。多头、输出投影、残差与前馈网络还要另行实现。')
+p('一个自拟例子：某条公共查询与两个细节位置的分数是[0,ln3]，权重就是[0.25,0.75]。若两个值为[2,0]与[0,4]，读取结果为[0.5,3]。权重小意味着当前计算读取较少，不能直接证明该位置是噪声；该位置的向量方向、后续层和任务头都影响最终输出。')
+p('原文设置八个注意力头；MOSI与RML用两层融合，MOSEI与IEMOCAP用四层。位置编码是可学习的。融合输出仍有3T个位置，平均池化才把它压成一个N/2维向量，再接任务头。不要把“Transformer decoder”理解为必然逐词生成文本，此处decoder式结构承担查询与补充表示的融合。')
+p('原文 Table 9 的正向查询比反向查询报告更好成绩，这是一项设计对照。它支持在这些设置下选择NRGF查询MF，却不能证明任意数据与标签都应这样做。更换为纯视频、ASR错误很多的语料或多标签目标时，应重新核实数据流和收益，而不是把论文配置当作普适定律。')
+
+section('noise','05 · 两类人工噪声与两个判别器，分别在学什么？')
+p('先看原文 Figure 3：Type-1 给各模态分别生成遮罩，随机擦除长度0到T/2的一个连续时间窗；各模态的遮罩是独立生成的，不能简写成所有模态同一时间段同步清零。Type-2则随机选择一种模态擦除窗口，其余模态保持。长度可以为0，也意味着一次采样有可能没有删掉内容。')
+p('这不是高斯噪声注入，而是语义擦除。零向量不一定等于真实传感器失效的统计分布；投影层若有偏置，零向量经过g之后也可能不再为零。因此必须记录操作放在哪一层，且保留原有padding mask。把被擦除位置再作为padding完全屏蔽，会改变模型看见干扰的方式，不能不加说明地混用。')
+eq(r"\min_{\theta_{D1}}\max_{\theta_{NR}}\mathcal L_{adv-1}=-\frac1{N_b}\sum_{i=1}^{N_b}y_M^i\cdot\log F_{D1}(F^{NR}/F^M;\theta_{D1})",'原文 Eq.6 的等价索引整理','N_b为样本数，y_M为模态标签，θ_D1为判别器参数，斜杠表示原文按不同特征来源使用该判别器，不是两个张量相除。判别器学习识别MF的模态来源；NRGF提取器通过相反目标让公共表示难以被按模态区分。求和起点按常用1到N_b整理，避免原文0到N_b与样本数的记号歧义。')
+p('Type-1的目标并不是一个简单“有噪声／没噪声”二分类器。原文§3.5.2说明D1关注模态依赖模式，并对NRGF增加三个MLP，以便组织成三份与模态相关的输入。若初学者只写一个二分类噪声头，会改变这部分目标。共享空间与模态判别的关系，需要从输入来源、标签、梯度路径三者一起理解。')
+eq(r"\min_{\theta_{D2}}\max_{\theta_{NR}}\mathcal L_{adv-2}=-\frac1{N_b}\sum_{i=1}^{N_b}y_N^i\cdot\log F_{D2}(F^{NR};\theta_{D2})",'原文 Eq.7 的等价索引整理','D2针对Type-2扰动，y_N由人工扰动规则提供。正文一处写成有无噪声正负标签，公式后又解释为哪种模态受损；公开全文没有把标签编码和判别器输出数彻底展开。本讲义保留这个待核实点，教学演示只验证梯度反转，不能冒充已确定完整D2实现。')
+p('GRL的前向计算保持输入数值，反向把传给特征提取器的梯度乘负系数。判别器仍在降低分类损失，特征提取器收到的方向反转。对抗分支之外的情绪分支仍按正常梯度训练；若把整个网络损失都取负号，就连情绪识别也会朝错误方向优化。')
+parts.append('<div class="demo"><h3>交互：同一个损失，梯度往哪走？</h3><p>自拟标量例子：特征z=2，判别器目标为0，L=(z−0)²。原梯度为4；经过GRL后，提取器端为−4λ。只展示梯度规则，不代表完整对抗优化。</p><label for="grl-alpha">GRL 系数 λ</label><input id="grl-alpha" type="range" min="0" max="1" step="0.05" value="0.5"><output id="grl-output" aria-live="polite"></output></div>')
+
+section('objectives','06 · 最终任务不能丢：分类、回归、多标签用不同监督')
+eq(r"\mathcal L_{er}=\begin{cases}-\frac1{N_b}\sum_i y_i\cdot\log\hat y_i&\text{classification}\\ \frac1{N_b}\sum_i\|y_i-\hat y_i\|_2^2&\text{regression}\end{cases}",'原文 Eq.8：按标签选损失','离散互斥类别用交叉熵；MOSI/MOSEI主实验的连续情感分数用MSE。分类式中的ŷ表示概率，实际程序可让CrossEntropyLoss接受logits并内部完成log-softmax。把连续标签直接传入整数分类接口，会改变任务。')
+eq(r"\mathcal L=\alpha\mathcal L_{adv-1}+\beta\mathcal L_{adv-2}+\gamma\mathcal L_{er}",'原文 Eq.9：三个目标的权重','原文MOSI/MOSEI用α=β=0.01、γ=1，RML/IEMOCAP用α=β=0.005、γ=1。这个加和式需要配合GRL或明确的交替优化理解；直接让所有参数同向最小化两个判别损失，不会产生对抗。')
+p('期刊版§4.7.14另做MOSEI六情绪多标签，使用Sigmoid与BCE。每个类别有独立是否存在的判断，允许同时开心与惊讶；这与七档情感倾向分箱不同。你拓展ALMT时必须同步修改标签读取、输出维度、损失与指标，并在验证集确定阈值，不能只把回归头的1改成6。')
+
+section('code','07 · 代码核查：哪些能直接对照，哪些只能教学实现？')
+p('截至2026-10-23，在全文、作者主页、作者GitHub以及论文标题／NRGF检索中，未找到可确认的NORM-TR官方公开实现。准确表述是“本次未定位到官方代码”，而非证明它从未发布。因而也没有可核验的官方checkpoint、预处理入口与D2编码；本页不把自写网络称为论文复现。')
+p('按skill要求继续查找替代参考，已浅克隆同一作者公开的LNLN仓库，阅读README、models/basic_layers.py、models/lnln.py、core/dataset.py和configs/train_mosi.yaml。它属于另一篇论文，具有独立语言主导、补全与缺失机制。其README及配置都不应拿来替代NORM-TR的参数。这里仅摘录通用GRL实现来说明§3.5.2；缺失数据生成也不同，LNLN的逐位置随机缺失不等于本文连续窗擦除。')
+code_root=ROOT.parent.parent/'paper_analysis/norm-tr/related-code'
+sha='80a052c62b7b3b7a6cb6956846e9d9c121f56eda'
+for start,end in [(6,15),(18,24)]:
+ lines=(code_root/'models/basic_layers.py').read_text(encoding='utf-8').splitlines()
+ parts.append(f'<div class="code-source">相关实现参考，不是NORM-TR源码：<a href="https://github.com/Haoyu-ha/LNLN/blob/{sha}/models/basic_layers.py#L{start}-L{end}">LNLN / models/basic_layers.py:{start}–{end}</a></div><pre><code>'+html.escape('\n'.join(f'{i}: {lines[i-1]}' for i in range(start,end+1)))+'</code></pre>')
+p('第一段中forward返回x的视图，backward才对grad_output取负并乘alpha；第二段把这个自定义自动求导函数包装成模块。它只保证该分支的梯度规则，不会替你定义模态标签、组织批次、选择判别器输入。把函数复制进项目之后，仍需要做梯度单元检查，确认判别器参数与共享提取器实际收到预期方向。')
+parts.append('<p><a class="btn" href="norm_learning_checks.py" download>下载最小学习脚本：遮窗、GRL、AUILC</a></p>')
+
+section('experiments','08 · 三组证据：正常输入、组件消融、受扰动曲线')
+p('论文主实验使用MOSI、MOSEI、IEMOCAP与RML。§4.2记载batch16、初始学习率1e−4、warm-up和余弦退火，硬件RTX3090。RML/IEMOCAP统一长度8，MOSI/MOSEI为50；视频按段采一帧，音频与文本截取前T位置。这不是ALMT学习token压缩的同一种操作，也不意味着你应修改已经完成的ALMT配置。')
+table('期刊版 Table 1–2 节选：正常输入，Acc-7 为百分数，MAE 越低越好',['方法','MOSI Acc-7','MOSI MAE','MOSEI Acc-7','MOSEI MAE'],[['MulT',40.0,.871,51.8,.580],['MISA',42.3,.783,52.2,.555],['Self-MM',45.8,.713,53.5,.530],['FDMER',44.1,.724,54.1,.536],['NORM-TR',48.5,.698,54.6,.529]])
+p('相对Self-MM，MOSI Acc-7高2.7个百分点，MAE低0.015；MOSEI Acc-7高1.1个百分点，但MAE只低0.001。两个指标的改善幅度不一致，所以不能只挑一个数字描述整体能力。表中来自不同文献的成绩也不等于对所有方法统一重跑；公开特征版本、训练设置与选模规则会影响可比性。')
+table('期刊版 Table 6：删组件对照，保持原表报告值',['变体','MOSI Acc-7 %','MOSI MAE','MOSEI Acc-7 %','MOSEI MAE'],[['完整模型',48.5,.698,54.6,.529],['去NRGF',46.8,.726,52.3,.547],['去MF',48.1,.706,53.6,.534],['去融合Transformer',45.6,.734,53.8,.536],['去抗噪学习方案',46.9,.721,53.2,.544],['标准Transformer基线',21.0,.900,40.3,.831]])
+p('去抗噪学习在MOSI使Acc-7下降1.6个百分点，去MF只降0.4个百分点；它们支持两个部件在该报告设置下有帮助。去NRGF、去融合同时改变特征路径，不能把差距全部解释成已识别真实噪声。标准Transformer是作者定义的直接拼接输入基线，21.0这个数不是对所有Transformer模型性能的评价；MulT在主表中也远高于它。')
+eq(r"\operatorname{AUILC}=\sum_j\frac{x_j+x_{j+1}}2\,(r_{j+1}-r_j)",'原文 Eq.10：扰动曲线的梯形面积','r为遮蔽比例，x为对应指标。若x是准确率则面积通常越大越好；若x是MAE则面积越小越好。原式索引t在这里改成j，避免与视频时间T混淆。它概括整段曲线，不能揭示每个严重程度的失败方式。')
+table('期刊版 Table 5 节选：曲线面积，不是无噪声成绩；*为作者重跑',['方法','MOSI Acc-7面积 %','MOSI MAE面积','MOSEI Acc-7面积 %','MOSEI MAE面积'],[['MulT*',22.7,1.265,46.4,.692],['MISA*',27.0,1.181,44.5,.720],['TFR-Net*',26.8,1.175,46.5,.686],['NORM-TR',31.3,1.093,47.3,.673]])
+p('原文 Figure 5 画的是随遮蔽比例变化的曲线，Table 5才是面积汇总。MOSI的48.5是正常输入Acc-7，31.3是跨比例面积，不能把二者当成两个种子成绩。自拟三点r=[0,0.5,1]、准确率[0.8,0.6,0.2]的面积为0.55；只计算三个数平均会得到约0.533，是不同统计量。')
+p('Table 8进一步显示MOSI文本单模态的面积Acc-7为30.7、MAE为1.104，完整模型为31.3、1.093；差距较小。它提示语言在该任务很强，不能把多模态优势无限放大。应保留文本基线，并同时报告额外训练成本。你已有ALMT文本与全模态结果接近，也应从具体错误组与稳定性继续分析，而非预设音视频一定贡献明显。')
+table('期刊版 Table 13 同设置重跑部分：多标签总体指标',['方法','Overall w-Acc %','Overall F1 %'],[['M3ER（作者独立重现）',58.91,75.93],['NORM-TR',58.17,76.56]])
+p('多标签表给出一个很有用的反例：F1提高0.63个百分点，w-Acc却低0.74个百分点。不能写成“多标签全面超过M3ER”。原表上半部分来自其他论文、下半部分才是作者同设置比较，协议差异使它们不能排成无条件排行榜。理解这点，比记住最高数更接近真实论文阅读能力。')
+
+section('limits','09 · 局限：对什么稳，代价又是什么？')
+p('<strong>作者自述：</strong>§5明确表示没有解决情绪标签不一致与缺失问题；人工给输入加噪声，不会自动修复标注者分歧或提供未标记类别。§4.7.15、Figure 11还展示强正向措辞及表情引起的失败，说明自然语义歧义仍可能误导模型。一次成功案例不等于已建立可靠冲突推理。')
+p('<strong>独立判断一：扰动分布有限。</strong>连续特征擦除只是缺失的一种代理，不能替代自然背景声、持续偏置、转写错误或不同人脸身份。做拓展时先明确训练扰动与评测扰动是否相同，再增加未见扰动；如果一直用同一种mask分布，结论应限定在该协议的鲁棒性。')
+p('<strong>独立判断二：不变性与细粒度的张力。</strong>细微声调、短暂表情既可能是干扰，也可能是细粒度标签的关键。把模态依赖信息压低，有时会删除目标需要的差异。可以按低强度与高强度情绪拆指标，观察稳定表示是否伤害弱信号，但必须有相应标签，不能事后凭直觉给全部错误归因。')
+p('<strong>独立判断三：跨场景与持续学习需另建协议。</strong>四个数据集分别训练得到好成绩，不代表训练A后适应B仍记住A。NORM-TR没有旧模型保护、Fisher约束或阶段状态更新；若要走无回放路线，应先用EST等视频基线建立阶段成绩矩阵，再对照LwF、EWC与EmWorld，区分抗输入扰动和抗参数遗忘。')
+p('原文也存在需要审计的文字细节：D2的标签说明不够统一；§4.7.7文字提到SIMS但Table 10列为MOSEI；MOSEI正文总数与所列划分相加不一致。这些不足不直接否定主结果，却提醒复现者使用实际版本的ID清单、标签编码和配置，并在报告里列出待核实项。没有官方源码时，更不应把一个“能运行”的重写称为忠实复现。')
+
+section('practice','10 · 两天入门任务：先验证机制，再谈训练')
+table('最小实施清单：时间为学习安排估计，不是训练耗时实测',['任务','具体操作','验收产物'],[['30分钟：画图','不看本页画两分支、Q/K/V、D1/D2，标三处shape','norm_dataflow.md，说明3T与N/2'],['30分钟：跑教学脚本','在已有ALMT环境运行下载脚本；检查mask形状、GRL与梯形面积','norm_checks.json，所有assert通过'],['45分钟：读原表','计算MOSI主结果差值、去MF差值、Table13反例','三段分析，每段写证据与不能推出的结论'],['60分钟：写扰动协议','列训练/验证/测试ID，固定强度与种子，说明擦除层位','robustness_protocol.json'],['后续小实验','先在冻结文本/拼接头基线上做固定扰动诊断，再决定是否实现双分支','逐比例曲线、干净分数、额外成本']])
+p('下载脚本只依赖你现有环境中的PyTorch和Python标准库，不读数据、不训练、不改已有实验。把文件放进独立learning_tasks目录后，命令可以是：<code>&amp; D:/Dolphin/codex/sc/almt_local/env/python.exe learning_tasks/norm_learning_checks.py --output learning_tasks/norm_checks.json</code>。若路径不同，使用实际验证过的解释器路径；脚本输出是教学数值检查，不是论文指标。')
+p('正式实验前先做一条样本的可视核查，确认被mask的时间窗与padding不同，标签与样本ID没有改变。同一样本的所有对照方法复用相同扰动种子，避免把“抽到较容易的mask”当成模型更稳。训练用数据增强、验证用预设协议选模、测试配置冻结后评价，职责分清才能解释差距。')
+p('如果只想利用已有ALMT权重，可以先测固定遮蔽下的退化曲线，标注为“已有模型的扰动诊断”；它不能证明NORM-TR抗噪训练有效。若据现有测试错误设计了新方法，应使用新的独立评价，或明确披露探索性分析。新任务的阈值、强度与超参数在验证集确定，不能反复看测试成绩挑设置。')
+parts.append('<details><summary>自测：D1 与 D2 都是简单的二分类噪声头吗？</summary><p>不是。D1重点约束模态可辨认性，D2针对单模态人工受损。后者编码细节在原文中需进一步核实；二者的输入、标签和梯度路径应分别写清。</p></details><details><summary>自测：GRL前向改变了特征值吗？</summary><p>没有。它前向是恒等映射，反向对指定分支的梯度乘负系数。若λ=0，该分支传给提取器的梯度为零，但判别器自身仍可学习。</p></details><details><summary>自测：为什么面积Acc-7为31.3，不和正常48.5矛盾？</summary><p>一个汇总不同mask比例下的曲线，一个是正常输入的点。面积低反映受扰动后性能下降，不是同一条件下结果冲突。</p></details><details><summary>自测：完成这些检查是否已经复现NORM-TR？</summary><p>还没有。你验证了遮窗、GRL与面积计算的基础机制。官方编码、全部训练细节、数据特征和完整对照仍待建立。</p></details>')
+p('完成后应能解释一条完整因果假设链：人工擦除提供已知干扰，判别与反向梯度约束公共表示，任务监督保持情绪信息，细节分支补充公共表示遗漏的内容，最后用干净与受扰动评价共同检验。如果某一环节只剩模块名称，先回到该环节的输入、标签和shape；不要立即增加另一个网络来遮盖未弄清的问题。')
+
+section('sources','来源与核查范围')
+parts.append('<ol><li><a href="https://link.springer.com/article/10.1007/s11263-024-02304-3">出版商元数据与摘要</a>；<a href="https://cvlab-liuyuanyuan.github.io/pdf/journalpaper/Noise-Resistant%20Multimodal%20Transformer%20for%20Emotion%20Recognition.pdf">作者主页21页期刊全文</a>。已读§1—5、Table1—13及参考文献；本页数据以期刊版编号为准。</li><li><a href="https://arxiv.org/abs/2305.02814">arXiv摘要</a>与<a href="https://arxiv.org/html/2305.02814">HTML全文</a>用于版本对照。未找到可确认的官方代码，核查日期2026-10-23。</li><li><a href="https://github.com/Haoyu-ha/LNLN/tree/'+sha+'">相关LNLN代码</a>仅为GRL通用实现参考；固定提交'+sha+'，MIT许可见<a href="assets/LNLN-CODE-LICENSE.txt">许可证</a>。它不是NORM-TR的替代实现。</li><li>图示为讲义重新绘制；原文图以编号和定位说明引导阅读。表格为带出处的数值节选。教学公式、交互和脚本均明确标注，不提供论文原PDF再分发。</li></ol>')
+
+payload={'title':'NORM-TR：怎样学习抗噪的公共表示，同时保留情绪细节？','subtitle':'把双分支、两类遮窗、两个判别器与梯度反转连成一条可以检查的计算路径。','metadata':'<strong>原题：</strong>Noise-Resistant Multimodal Transformer for Emotion Recognition<br><strong>作者：</strong>Yuanyuan Liu、Haoyu Zhang、Yibing Zhan、Zijing Chen、Guanghao Yin、Lin Wei、Zhe Chen<br><strong>出版：</strong>IJCV，133:3020–3040（2025）；2024-12-22在线发表；DOI 10.1007/s11263-024-02304-3<br><strong>代码：</strong>本次未定位到可确认的NORM-TR官方公开实现；相关实现与教学代码单独标注。','summary':'NORM-TR用人工遮窗与对抗学习训练公共表示，再以公共表示查询保留细节的模态表示；有效性需同时看正常成绩、扰动曲线和组件对照。','body':''.join(parts),'audit':{'full_read_pages':21,'original_equations':list(range(1,11)),'official_code':'not located in this search','related_code_sha':sha,'date':'2026-10-23'}}
+(ROOT/'norm-content.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
+print('norm-content.json written')

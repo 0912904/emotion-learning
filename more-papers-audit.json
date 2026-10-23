@@ -1,0 +1,94 @@
+{
+  "norm-tr": {
+    "structure": {
+      "chinese_characters": 5594,
+      "paragraphs": 53,
+      "equations": 11,
+      "tables": 5,
+      "code_excerpts": 2,
+      "diagram": 1
+    },
+    "evidence": {
+      "full_read_pages": 21,
+      "original_equations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "official_code": "not located in this search",
+      "related_code_sha": "80a052c62b7b3b7a6cb6956846e9d9c121f56eda",
+      "date": "2026-10-23"
+    }
+  },
+  "est": {
+    "structure": {
+      "chinese_characters": 7120,
+      "paragraphs": 64,
+      "equations": 10,
+      "tables": 4,
+      "code_excerpts": 2,
+      "diagram": 1
+    },
+    "evidence": {
+      "style": "academic",
+      "fullread": true,
+      "fullread_pages": 19,
+      "fullread_local": "paper_analysis/est/paper.txt",
+      "sources": [
+        "https://cvlab-liuyuanyuan.github.io/pdf/journalpaper/Expression%20Snippet%20Transformer%20for%20Robust%20Video-based%20Facial%20Expression%20Recognition.pdf",
+        "https://doi.org/10.1016/j.patcog.2023.109368",
+        "https://github.com/DreamMr/EST"
+      ],
+      "repository_sha": "f85a0cdcf974630648d2a60188d086ad85a0347a",
+      "code_files_read": [
+        "readme.md",
+        "models/Model.py",
+        "models/transformer.py",
+        "data/random_shuffle_dataset.py",
+        "main.py",
+        "load_materials.py",
+        "options/base_options.py",
+        "requirements.txt"
+      ],
+      "formula_groups": 10,
+      "original_formula_refs": [
+        "Eq.1",
+        "Eq.2",
+        "Eq.3",
+        "Eq.5",
+        "Eq.6",
+        "Eq.7"
+      ],
+      "figure_refs": [
+        "Figure1",
+        "Figure2",
+        "Figure3",
+        "Figure7",
+        "Figure12"
+      ],
+      "experimental_tables": [
+        "Table2–5 baseline comparison",
+        "Table6 module ablation",
+        "Table11 cross-database"
+      ],
+      "short_quotes_words": 8,
+      "source_excerpts": 2,
+      "no_training_run": true,
+      "notes": "No original figure bitmap reproduced; direct figure references with page links and explanation. Teaching equations explicitly distinguished. Browser/render QA by parent integration.",
+      "stats": {
+        "chinese_characters": 6755,
+        "paragraphs": 68,
+        "equation_groups": 10,
+        "tables": 4,
+        "source_excerpts": 2
+      }
+    }
+  }
+}
