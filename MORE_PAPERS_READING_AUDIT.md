@@ -24,3 +24,5 @@
 ## 重建
 
 发布资源已包含在 dist/。可运行 `python -X utf8 build_more_deep.py` 从 norm-content.json、est-content.json 重新生成两篇；沿用 dist/deep/almt.html 中的现有样式和本地渲染库。外部研究目录存在时可刷新许可证和练习文件，否则保留已跟踪资源。build_norm_deep.py 是NORM内容的写作源脚本，重新执行该脚本需要研究目录中的相关源码克隆；通常编辑JSON后重建即可。
+
+- 视觉检查进一步修正公式自动渲染包装层受标签字号影响的问题：公式实测字号20.57px，正文17px，公式标签单独样式。
