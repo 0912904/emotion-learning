@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="从基础到实验，逐步学习细粒度情绪理解与跨场景持续学习。28周路线、26篇论文与互动概念实验。"><title>情绪研究学习室 · Emotion Lab</title><link rel="stylesheet" href="style.css"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="从基础到实验，逐步学习细粒度情绪理解与跨场景持续学习。28周路线、26篇论文与互动概念实验。"><title>情绪研究学习室 · Emotion Lab</title><meta name="theme-color" content="#0f5c52"><meta property="og:title" content="情绪研究学习室"><meta property="og:description" content="28 周可执行学习路线、26 篇学术精读与交互概念实验。"><link rel="stylesheet" href="style.css?v=20261024-ui4"><link rel="stylesheet" href="ui.css?v=20261024-ui4"></head>
 <body>
 <a class="skip" href="#main">跳到主要内容</a>
 <aside class="sidebar">
- <a class="brand" href="#home"><span class="brand-mark">e<span>·</span></span><span>情绪研究学习室<small>EMOTION LEARNING LAB</small></span></a>
+ <a class="brand" href="#home"><span class="brand-mark">e<span>·</span></span><span>情绪研究学习室<small>细粒度理解 · 跨场景学习</small></span></a>
  <div class="nav-label">你的研究起点</div>
  <nav aria-label="主导航">
- <a href="#home" data-page="home"><span>◈</span>学习总览</a>
- <a href="#roadmap" data-page="roadmap"><span>↗</span>成长路线 <em>28</em></a>
- <a href="#papers" data-page="papers"><span>▤</span>论文阅读室 <em>26</em></a>
- <a href="#lab" data-page="lab"><span>⌘</span>概念实验台</a>
- <a href="#quiz" data-page="quiz"><span>✓</span>理解自测</a>
- <a href="#handbook" data-page="handbook"><span>≡</span>完整学习手册</a>
- <a href="#notes" data-page="notes"><span>✎</span>我的学习笔记</a>
+ <a href="#home" data-page="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>学习总览</a>
+ <a href="#roadmap" data-page="roadmap"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M8 6h9a4 4 0 0 1 0 8H7a4 4 0 0 0 0 8h9"/></svg>成长路线 <em>28</em></a>
+ <a href="#papers" data-page="papers"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16M8 4v16M12 4v16M16 4l5 15"/></svg>论文阅读室 <em>26</em></a>
+ <a href="#lab" data-page="lab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v7l-6 9a1.3 1.3 0 0 0 1 2h14a1.3 1.3 0 0 0 1-2l-6-9V3M8 15h8"/></svg>概念实验台</a>
+ <a href="#quiz" data-page="quiz"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>理解自测</a>
+ <a href="#handbook" data-page="handbook"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h14v18H6a2 2 0 0 1 0-4h14M8 3v9l3-2 3 2V3"/></svg>完整学习手册</a>
+ <a href="#notes" data-page="notes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h13a2 2 0 0 1 2 2v4M4 3v18h12M2 7h4M2 12h4M2 17h4M12 17l1-4 6-6 3 3-6 6z"/></svg>我的学习笔记</a>
  </nav>
- <div class="sidebar-bottom"><div class="plant">从一个好问题开始，<br>到一份可信的证据。</div><p>进度保存在当前浏览器<br>可在「笔记」中导出备份</p><a href="learning-roadmap.md" download>下载 Markdown 原文 ↗</a></div>
+ <div class="sidebar-bottom"><div class="plant">从一个好问题开始，<br>到一份可信的证据。</div><p>进度保存在当前浏览器<br>可在「笔记」中导出备份</p><a href="learning-roadmap.md" download><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>下载 Markdown 原文</a></div>
 </aside>
 <div class="workspace">
-<header class="topbar"><span id="breadcrumb">学习总览</span><span class="top-meta"><i></i>个人学习工作台 <span class="date">/ 2026 EDITION</span></span></header>
-<main id="main" tabindex="-1"></main>
+<header class="topbar"><span id="breadcrumb">学习总览</span><a id="backup-reminder" class="backup-reminder" href="#notes" hidden>该备份了 · 导出学习记录</a><span class="top-meta"><i></i>个人学习工作台 </span></header>
+<main id="main" tabindex="-1"><section class="hero"><div><h1>把好奇心，<br>变成研究的第一步。</h1><p>从读懂一条样本，到解释一个模型。沿着细粒度情绪理解与跨场景持续学习两条路线，把学习落到可验证的小实验。</p><a class="btn primary" href="deep/index.html">阅读 26 篇完整学术精读 →</a></div><div><h2>从一个具体任务开始</h2><p>28 周分步行动与验收 · 26 篇论文 · 互动概念练习</p><a href="learning-roadmap.md" download>下载完整学习路线</a></div></section><noscript><p class="info">当前未启用 JavaScript。你仍可阅读精读全文和下载学习手册；互动实验与本机进度保存需要启用 JavaScript。</p></noscript></main>
 <footer>一步一实验，让理解有迹可循。<span>论文资料核对：2026.10.22 · 学习建议不等于已完成实验</span></footer>
 </div>
-<dialog id="reader"><div class="dialog-top"><span id="dialog-label">学习详情</span><button id="close-dialog" class="icon-btn" aria-label="关闭详情">×</button></div><div id="dialog-content"></div></dialog>
-<div id="toast" role="status" aria-live="polite"></div>
-<script src="content.js"></script><script src="app.js"></script>
+<dialog id="reader" aria-labelledby="dialog-label"><div class="dialog-top"><span id="dialog-label">学习详情</span><button id="close-dialog" class="icon-btn" aria-label="关闭详情">×</button></div><div id="dialog-content"></div></dialog>
+<nav class="mobile-nav" aria-label="移动端导航"><a href="#home" data-page="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>总览</a><a href="#roadmap" data-page="roadmap"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="3"/><circle cx="19" cy="18" r="3"/><path d="M8 6h9a4 4 0 0 1 0 8H7a4 4 0 0 0 0 8h9"/></svg>路线</a><a href="#papers" data-page="papers"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16M8 4v16M12 4v16M16 4l5 15"/></svg>论文</a><a href="#handbook" data-page="handbook"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h14v18H6a2 2 0 0 1 0-4h14M8 3v9l3-2 3 2V3"/></svg>手册</a><button id="mobile-more" aria-haspopup="dialog"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>更多</button></nav><dialog id="more-menu" aria-labelledby="more-title"><div class="more-title"><h2 id="more-title">更多学习工具</h2><button id="close-more" class="icon-btn" aria-label="关闭更多工具">×</button></div><a href="#lab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v7l-6 9a1.3 1.3 0 0 0 1 2h14a1.3 1.3 0 0 0 1-2l-6-9V3M8 15h8"/></svg>概念实验台</a><a href="#quiz"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>理解自测</a><a href="#notes"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h13a2 2 0 0 1 2 2v4M4 3v18h12M2 7h4M2 12h4M2 17h4M12 17l1-4 6-6 3 3-6 6z"/></svg>我的学习笔记</a></dialog><div id="toast" role="status" aria-live="polite"></div>
+<script src="content.js" defer></script><script src="ui.js?v=20261024-ui4" defer></script><script src="app.js?v=20261024-ui4" defer></script>
 </body></html>

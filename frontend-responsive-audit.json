@@ -1,0 +1,198 @@
+[
+  {
+    "cards": 0,
+    "route": "#home",
+    "scroll": 320,
+    "title": "把好奇心，变成研究的第一步。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#roadmap",
+    "scroll": 320,
+    "title": "一步一步，走到自己的研究问题。",
+    "width": 320
+  },
+  {
+    "cards": 26,
+    "route": "#papers",
+    "scroll": 320,
+    "title": "不急着读完，先读懂一篇。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#lab",
+    "scroll": 320,
+    "title": "动一下参数，看概念怎样变化。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#quiz",
+    "scroll": 320,
+    "title": "先想一想，再看答案。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#handbook/s10",
+    "scroll": 320,
+    "title": "完整内容，随时回到原理。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#notes",
+    "scroll": 320,
+    "title": "给每一次理解，留下一点痕迹。",
+    "width": 320
+  },
+  {
+    "cards": 0,
+    "route": "#home",
+    "scroll": 390,
+    "title": "把好奇心，变成研究的第一步。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#roadmap",
+    "scroll": 390,
+    "title": "一步一步，走到自己的研究问题。",
+    "width": 390
+  },
+  {
+    "cards": 26,
+    "route": "#papers",
+    "scroll": 390,
+    "title": "不急着读完，先读懂一篇。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#lab",
+    "scroll": 390,
+    "title": "动一下参数，看概念怎样变化。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#quiz",
+    "scroll": 390,
+    "title": "先想一想，再看答案。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#handbook/s10",
+    "scroll": 390,
+    "title": "完整内容，随时回到原理。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#notes",
+    "scroll": 390,
+    "title": "给每一次理解，留下一点痕迹。",
+    "width": 390
+  },
+  {
+    "cards": 0,
+    "route": "#home",
+    "scroll": 768,
+    "title": "把好奇心，变成研究的第一步。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#roadmap",
+    "scroll": 768,
+    "title": "一步一步，走到自己的研究问题。",
+    "width": 768
+  },
+  {
+    "cards": 26,
+    "route": "#papers",
+    "scroll": 768,
+    "title": "不急着读完，先读懂一篇。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#lab",
+    "scroll": 768,
+    "title": "动一下参数，看概念怎样变化。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#quiz",
+    "scroll": 768,
+    "title": "先想一想，再看答案。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#handbook/s10",
+    "scroll": 768,
+    "title": "完整内容，随时回到原理。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#notes",
+    "scroll": 768,
+    "title": "给每一次理解，留下一点痕迹。",
+    "width": 768
+  },
+  {
+    "cards": 0,
+    "route": "#home",
+    "scroll": 1280,
+    "title": "把好奇心，变成研究的第一步。",
+    "width": 1280
+  },
+  {
+    "cards": 0,
+    "route": "#roadmap",
+    "scroll": 1280,
+    "title": "一步一步，走到自己的研究问题。",
+    "width": 1280
+  },
+  {
+    "cards": 26,
+    "route": "#papers",
+    "scroll": 1280,
+    "title": "不急着读完，先读懂一篇。",
+    "width": 1280
+  },
+  {
+    "cards": 0,
+    "route": "#lab",
+    "scroll": 1280,
+    "title": "动一下参数，看概念怎样变化。",
+    "width": 1280
+  },
+  {
+    "cards": 0,
+    "route": "#quiz",
+    "scroll": 1280,
+    "title": "先想一想，再看答案。",
+    "width": 1280
+  },
+  {
+    "cards": 0,
+    "route": "#handbook/s10",
+    "scroll": 1280,
+    "title": "完整内容，随时回到原理。",
+    "width": 1280
+  },
+  {
+    "cards": 0,
+    "route": "#notes",
+    "scroll": 1280,
+    "title": "给每一次理解，留下一点痕迹。",
+    "width": 1280
+  }
+]

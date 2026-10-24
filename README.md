@@ -28,3 +28,12 @@
 - 精读页的笔记和已读状态使用原浏览器存储键，可在主站「我的学习笔记」导出。不同来源、浏览器或设备不自动同步。
 - 论文数值、源码核验与教学验证分别标注。代码不可获取、仅有评估实现、原稿数值冲突等情况均在对应文章中保留，不表示已重训原论文模型。
 
+# 2026-10-24 前端优化
+
+- 依据用户提供的 `D:/Dolphin/claude/frontend-improvement-plan.md`，对应现有结构实施；验收和范围见 `FRONTEND_IMPROVEMENT_AUDIT.md`。
+- 主站入口、基础样式为 `dist/index.html`、`dist/style.css`；增强样式和交互为 `dist/ui.css`、`dist/ui.js`，应用路由和任务内容在 `dist/app.js`。无新增外部依赖。
+- 浏览器存储键仍为 `emotion-learning-v1`，保留原阶段、论文、笔记和成绩，兼容原 version-1 JSON 备份；新增在读状态、清单、续学位置、导出时间。不同标签页同步，同设备不同浏览器或跨设备仍不自动同步。
+- `reading-collection.js` 是精读页公共交互源码；`build_remaining_deep.py` 将它复制到 `dist/deep/collection.js`，避免重建时覆盖本轮进度同步与防抖保存。
+- 内容重建仍使用既有生成器。不要日常运行历史迁移脚本 `upgrade_ui.py`，它会覆盖现有前端函数。修改静态脚本后同步更新入口资源的查询版本，避免浏览器使用旧缓存。
+- 核验：`node check_ui_state.cjs`、`node --check dist/app.js`、`node --check dist/ui.js`、`python -X utf8 check_deep_content.py`、`node check_math.cjs`。
+
