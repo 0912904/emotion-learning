@@ -1,0 +1,43 @@
+fairseq/models/wav2vec/wav2vec2.py
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+import math
+from dataclasses import dataclass, field
+from typing import List, Tuple
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from fairseq import utils
+from fairseq.data.data_utils import compute_mask_indices
+from fairseq.dataclass import ChoiceEnum, FairseqDataclass
+from fairseq.distributed import fsdp_wrap
+from fairseq.models import BaseFairseqModel, register_model
+from fairseq.distributed.fully_sharded_data_parallel import FullyShardedDataParallel
+
+fairseq/models/wav2vec/wav2vec2.py
+# Copyright (c) Facebook, Inc. and its affiliates.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+import math
+from dataclasses import dataclass, field
+from typing import List, Tuple
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from fairseq import utils
+from fairseq.data.data_utils import compute_mask_indices
+from fairseq.dataclass import ChoiceEnum, FairseqDataclass
+from fairseq.distributed import fsdp_wrap
+from fairseq.models import BaseFairseqModel, register_model
+from fairseq.distributed.fully_sharded_data_parallel import FullyShardedDataParallel

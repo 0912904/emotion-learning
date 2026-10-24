@@ -1,0 +1,8 @@
+document.addEventListener('DOMContentLoaded',()=>{
+const area=document.querySelector('[data-paper]');
+if(area){const key='emotion-learning-v1',id=area.dataset.paper,note=document.querySelector('#deep-note'),read=document.querySelector('#deep-read'),out=document.querySelector('#note-status');
+const get=()=>{try{const v=JSON.parse(localStorage.getItem(key)||'null');if(!v||typeof v!=='object')throw Error('invalid state');return {...v,weeks:Array.isArray(v.weeks)?v.weeks:[],papers:Array.isArray(v.papers)?v.papers.filter(x=>typeof x==='string'):[],notes:v.notes&&typeof v.notes==='object'&&!Array.isArray(v.notes)?v.notes:{},quizBest:Number(v.quizBest)||0};}catch(e){return {weeks:[],papers:[],notes:{},quizBest:0};}};
+let state=get();note.value=state.notes?.[id]||'';read.checked=(state.papers||[]).includes(id);
+const save=()=>{try{let s=get();s.notes=s.notes||{};s.notes[id]=note.value.slice(0,20000);s.papers=(s.papers||[]).filter(x=>x!==id);if(read.checked)s.papers.push(id);localStorage.setItem(key,JSON.stringify(s));out.textContent='已保存在当前浏览器';}catch(e){out.textContent='保存失败，请复制笔记备份';}};note.addEventListener('input',save);read.addEventListener('change',save);}
+const search=document.querySelector('#collection-search'),filter=document.querySelector('#collection-filter');if(search){const update=()=>{let n=0;document.querySelectorAll('.collection-card').forEach(c=>{const ok=c.textContent.toLowerCase().includes(search.value.toLowerCase())&&(filter.value==='all'||c.dataset.group===filter.value);c.hidden=!ok;if(ok)n++;});document.querySelector('#collection-count').textContent=`显示 ${n} 篇`};search.addEventListener('input',update);filter.addEventListener('change',update);update();}
+});

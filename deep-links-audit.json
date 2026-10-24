@@ -1,0 +1,167 @@
+{
+  "pages": [
+    {
+      "page": "affectgpt.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "almt.html",
+      "display_math": 8,
+      "inline_math": 20,
+      "links": 38
+    },
+    {
+      "page": "attention.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 31
+    },
+    {
+      "page": "bert.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 32
+    },
+    {
+      "page": "cera.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 21
+    },
+    {
+      "page": "ch-sims.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 24
+    },
+    {
+      "page": "clip.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 31
+    },
+    {
+      "page": "dann.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 26
+    },
+    {
+      "page": "ecpa.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 21
+    },
+    {
+      "page": "emer.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "emworld.html",
+      "display_math": 7,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "est.html",
+      "display_math": 10,
+      "inline_math": 0,
+      "links": 37
+    },
+    {
+      "page": "ewc.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 24
+    },
+    {
+      "page": "ferv39k.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 26
+    },
+    {
+      "page": "gpm.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 24
+    },
+    {
+      "page": "index.html",
+      "display_math": 0,
+      "inline_math": 0,
+      "links": 74
+    },
+    {
+      "page": "lora.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "lwf.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 24
+    },
+    {
+      "page": "mosei.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 28
+    },
+    {
+      "page": "mult.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 33
+    },
+    {
+      "page": "norm-tr.html",
+      "display_math": 11,
+      "inline_math": 0,
+      "links": 30
+    },
+    {
+      "page": "ovmer.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "pcfrl.html",
+      "display_math": 7,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "pcl.html",
+      "display_math": 6,
+      "inline_math": 0,
+      "links": 23
+    },
+    {
+      "page": "resnet.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 33
+    },
+    {
+      "page": "simclr.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 31
+    },
+    {
+      "page": "wav2vec2.html",
+      "display_math": 5,
+      "inline_math": 0,
+      "links": 33
+    }
+  ],
+  "failures": []
+}

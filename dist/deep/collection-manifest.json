@@ -1,0 +1,184 @@
+[
+  {
+    "id": "P01",
+    "slug": "attention",
+    "name": "Transformer",
+    "group": "common",
+    "summary": "Transformer 用注意力直接建立序列位置之间的联系，训练时避免循环网络的逐位置递推；理解查询、键、值、掩码和残差，是读懂 ALMT 与 MulT 的前提。"
+  },
+  {
+    "id": "P02",
+    "slug": "bert",
+    "name": "BERT",
+    "group": "common",
+    "summary": "BERT 用双向 Transformer 编码上下文，通过掩码语言建模与下一句预测预训练，再用少量任务层进行微调；重点是分清预训练目标、输入掩码、冻结提取与端到端训练。"
+  },
+  {
+    "id": "P03",
+    "slug": "clip",
+    "name": "CLIP",
+    "group": "fine",
+    "summary": "CLIP 用大规模图文配对训练两个编码器，再把类别写成文字进行零样本分类。读懂它需要区分对比训练、提示词分类、线性探测以及跨分布泛化。"
+  },
+  {
+    "id": "P04",
+    "slug": "wav2vec2",
+    "name": "wav2vec 2.0",
+    "group": "fine",
+    "summary": "wav2vec 2.0 先把波形压缩为连续特征，再遮住部分时间片，用上下文去辨认离散目标；少量转写标签用于后续语音识别微调。语音表示不等于情绪表示，需要独立验证。"
+  },
+  {
+    "id": "P05",
+    "slug": "mult",
+    "name": "MulT",
+    "group": "common",
+    "summary": "MulT 使用有方向的跨模态注意力，把一种模态的信息写入另一种模态的时间轴；六个方向的交互再经过时序建模，用于情感与情绪任务。"
+  },
+  {
+    "id": "P06",
+    "slug": "almt",
+    "name": "ALMT",
+    "group": "common",
+    "summary": "已完成的完整学术精读：概念、公式、方法、源码、实验与练习。"
+  },
+  {
+    "id": "P07",
+    "slug": "ch-sims",
+    "name": "CH-SIMS",
+    "group": "common",
+    "summary": "CH-SIMS 为同一片段提供整体与三个单模态标签，用共享编码器和四个预测头检验辅助监督；收益依赖任务组合与评价粒度。"
+  },
+  {
+    "id": "P08",
+    "slug": "mosei",
+    "name": "CMU-MOSEI",
+    "group": "common",
+    "summary": "MOSEI 同时提供极性和六类情绪强度；Graph-MFN 用十九个动态边门控制不同阶数的模态组合，并以时序记忆完成预测。"
+  },
+  {
+    "id": "P09",
+    "slug": "norm-tr",
+    "name": "NORM-TR",
+    "group": "fine",
+    "summary": "已完成的完整学术精读：概念、公式、方法、源码、实验与练习。"
+  },
+  {
+    "id": "P10",
+    "slug": "emer",
+    "name": "EMER",
+    "group": "fine",
+    "summary": "EMER 建立解释性线索与评价流程；其人工审核输入、音频预标注版本和算术均值必须与后续 OV-MER 区分。"
+  },
+  {
+    "id": "P11",
+    "slug": "ovmer",
+    "name": "OV-MER",
+    "group": "fine",
+    "summary": "OV-MER 允许任意类型与数量的情绪标签，但结果依赖线索质量、语义分组及评价粒度。"
+  },
+  {
+    "id": "P12",
+    "slug": "affectgpt",
+    "name": "AffectGPT",
+    "group": "fine",
+    "summary": "AffectGPT 同时改进训练描述、音视频预融合与统一评价；质量过滤的收益需要与模型结构收益分开解释。"
+  },
+  {
+    "id": "P13",
+    "slug": "ecpa",
+    "name": "ECPA",
+    "group": "fine",
+    "summary": "ECPA 利用全局情绪与局部 AU 提示增强视频描述；局部相似度损失、评价边界和公开实现缺口都需要明确。"
+  },
+  {
+    "id": "P14",
+    "slug": "cera",
+    "name": "CERA",
+    "group": "fine",
+    "summary": "CERA 构建视觉、文本和融合图，通过奖励评价与反馈迭代改善推理；相对接受不等于事实正确。"
+  },
+  {
+    "id": "P15",
+    "slug": "lora",
+    "name": "LoRA",
+    "group": "fine",
+    "summary": "冻结基础矩阵，只训练低秩更新；节约训练参数并不自动解决跨场景遗忘。"
+  },
+  {
+    "id": "P16",
+    "slug": "est",
+    "name": "EST",
+    "group": "cross",
+    "summary": "已完成的完整学术精读：概念、公式、方法、源码、实验与练习。"
+  },
+  {
+    "id": "P17",
+    "slug": "dann",
+    "name": "DANN",
+    "group": "cross",
+    "summary": "源域监督保持语义，领域对抗减少分布差异；目标域输入仍然需要在训练时可访问。"
+  },
+  {
+    "id": "P18",
+    "slug": "lwf",
+    "name": "LwF",
+    "group": "cross",
+    "summary": "在新输入上蒸馏旧模型输出，以有限的行为约束减少遗忘；新旧域距离决定约束能覆盖多少旧知识。"
+  },
+  {
+    "id": "P19",
+    "slug": "ewc",
+    "name": "EWC",
+    "group": "cross",
+    "summary": "保存旧参数与 Fisher 对角，对重要方向的移动施加惩罚；局部近似和新旧任务权衡决定其能力边界。"
+  },
+  {
+    "id": "P20",
+    "slug": "gpm",
+    "name": "GPM",
+    "group": "cross",
+    "summary": "保存逐层输入的重要子空间，并从新梯度中去掉这些方向；有限记忆空间决定保护与适应的权衡。"
+  },
+  {
+    "id": "P21",
+    "slug": "emworld",
+    "name": "EmWorld",
+    "group": "cross",
+    "summary": "慢状态保护跨场景类别结构，快约束利用帧间动态；阶段更新、权重融合和评价协议都必须一并核对。"
+  },
+  {
+    "id": "P22",
+    "slug": "ferv39k",
+    "name": "FERV39k",
+    "group": "cross",
+    "summary": "四粗场景、二十二细场景与七类表情构成跨场景基准；理解筛选、标签和划分比盲目换模型更重要。"
+  },
+  {
+    "id": "P23",
+    "slug": "pcl",
+    "name": "PCL",
+    "group": "cross",
+    "summary": "PCL 用因素交换重建与两类对比学习改善通用人脸表示；姿态不变性、代码差异和各下游任务边界必须分清。"
+  },
+  {
+    "id": "P24",
+    "slug": "pcfrl",
+    "name": "PCFRL",
+    "group": "cross",
+    "summary": "PCFRL 在 PCL 上加入分支独立的邻域亲和度与正对校准；阈值、批量组成和对数内权重是理解关键。"
+  },
+  {
+    "id": "P25",
+    "slug": "resnet",
+    "name": "ResNet",
+    "group": "common",
+    "summary": "ResNet 用恒等捷径把输入直接加回残差分支，让深层网络学习对现有表示的修正。关键不是简单“防止梯度消失”，而是理解退化问题、维度匹配、优化证据及过拟合边界。"
+  },
+  {
+    "id": "P26",
+    "slug": "simclr",
+    "name": "SimCLR",
+    "group": "common",
+    "summary": "SimCLR 将同一图像的两种增强视图作为正例，用对比目标学习表示；真正关键的是增强定义、投影头、归一化与评价协议，而不是仅记住“拉近正样本、推远负样本”。"
+  }
+]

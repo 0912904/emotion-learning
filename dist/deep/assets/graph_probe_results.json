@@ -1,0 +1,16 @@
+{
+  "source": "thuiar/MMSA",
+  "commit": "a94e65d07fa1ae0d44e552390074b29b0898edfd",
+  "teaching_probe": true,
+  "data_or_training_used": false,
+  "edge_count": 19,
+  "output_shape": [
+    2,
+    3
+  ],
+  "internal_parameter_tensors": 16,
+  "internal_parameter_tensors_registered": 0,
+  "controlled_final_bias": 2.0,
+  "gate_min": 2.0,
+  "gate_max": 2.0
+}

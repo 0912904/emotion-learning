@@ -1,0 +1,606 @@
+{
+  "papers": {
+    "attention": {
+      "structure": {
+        "chinese_characters": 4588,
+        "paragraphs": 45,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4588,
+        "paragraphs": 45,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "bafdc1b67730430d38d6ab802cbd51f9d053ba2e",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\attention\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\attention\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 10,
+        "pdf_pages": 15,
+        "figure_table_references": 8
+      }
+    },
+    "bert": {
+      "structure": {
+        "chinese_characters": 4695,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4695,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "eedf5716ce1268e56f0a50264a88cafad334ac61",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\bert\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\bert\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 8,
+        "pdf_pages": 16,
+        "figure_table_references": 8
+      }
+    },
+    "clip": {
+      "structure": {
+        "chinese_characters": 4540,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4540,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "d05afc436d78f1c48dc0dbf8e5980a9d471f35f6",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\clip\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\clip\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 9,
+        "pdf_pages": 48,
+        "figure_table_references": 10
+      }
+    },
+    "wav2vec2": {
+      "structure": {
+        "chinese_characters": 4529,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4529,
+        "paragraphs": 46,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "3d262bb25690e4eb2e7d3c1309b1e9c406ca4b99",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\wav2vec2\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\wav2vec2\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 6,
+        "pdf_pages": 19,
+        "figure_table_references": 7
+      }
+    },
+    "mult": {
+      "structure": {
+        "chinese_characters": 4665,
+        "paragraphs": 48,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4665,
+        "paragraphs": 48,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "a670936824ee722c8494fd98d204977a1d663c7a",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\mult\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\mult\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 8,
+        "pdf_pages": 12,
+        "figure_table_references": 9
+      }
+    },
+    "ch-sims": {
+      "structure": {
+        "chinese_characters": 4067,
+        "paragraphs": 38,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 10,
+        "source": "Yu 等 · ACL 2020 · DOI 10.18653/v1/2020.acl-main.343",
+        "code_commit": "a94e65d07fa1ae0d44e552390074b29b0898edfd",
+        "code_status": "MMSA作者框架"
+      }
+    },
+    "mosei": {
+      "structure": {
+        "chinese_characters": 4434,
+        "paragraphs": 42,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 11,
+        "source": "Zadeh 等 · ACL 2018 · DOI 10.18653/v1/P18-1208",
+        "code_commit": "a94e65d07fa1ae0d44e552390074b29b0898edfd",
+        "code_status": "官方SDK与MMSA第三方Graph-MFN实现分别说明"
+      }
+    },
+    "emer": {
+      "structure": {
+        "chinese_characters": 4271,
+        "paragraphs": 40,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 16,
+        "source": "https://arxiv.org/abs/2306.15401v6",
+        "code_status": "作者后续仓库源码已核验；并非 v6 原始完整实现",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4271
+      }
+    },
+    "ovmer": {
+      "structure": {
+        "chinese_characters": 4241,
+        "paragraphs": 40,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 36,
+        "source": "https://proceedings.mlr.press/v267/lian25b.html",
+        "code_status": "作者统一仓库已读取；当前情绪轮默认设置与论文 GPT 分组主表需区分",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4241
+      }
+    },
+    "affectgpt": {
+      "structure": {
+        "chinese_characters": 4091,
+        "paragraphs": 39,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 22,
+        "source": "https://proceedings.mlr.press/v267/lian25a.html",
+        "code_status": "作者代码及核心配置已读，固定提交95b9257758df；未执行完整训练",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4091
+      }
+    },
+    "ecpa": {
+      "structure": {
+        "chinese_characters": 4155,
+        "paragraphs": 38,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 15,
+        "source": "https://doi.org/10.1109/TMM.2025.3535292",
+        "code_status": "仓库8026d4032901仅核验到说明和演示，核心src缺失；无伪造源码引用",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4155
+      }
+    },
+    "cera": {
+      "structure": {
+        "chinese_characters": 4139,
+        "paragraphs": 39,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 10,
+        "source": "https://doi.org/10.1145/3805622.3810634",
+        "code_status": "本次未找到可核验官方实现；全文机制与独立教学任务分开",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4139
+      }
+    },
+    "lora": {
+      "structure": {
+        "chinese_characters": 4125,
+        "paragraphs": 40,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/2106.09685",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4125,
+        "paragraphs": 38,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 8,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ]
+      }
+    },
+    "dann": {
+      "structure": {
+        "chinese_characters": 4156,
+        "paragraphs": 42,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/1505.07818",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4156,
+        "paragraphs": 40,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 8,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ],
+        "code_status": "第三方PyTorch源码已读；作者浅层仓库已识别；未执行训练"
+      }
+    },
+    "lwf": {
+      "structure": {
+        "chinese_characters": 4095,
+        "paragraphs": 43,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/1606.09282",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4095,
+        "paragraphs": 41,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 6,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ]
+      }
+    },
+    "ewc": {
+      "structure": {
+        "chinese_characters": 4080,
+        "paragraphs": 42,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/1612.00796",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4080,
+        "paragraphs": 40,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 8,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ],
+        "code_status": "第三方教学代码，无明确许可证文件；仅两处极短引用",
+        "experimental_tables": "原文补充材料数值配置表；未将曲线估读冒充性能数据"
+      }
+    },
+    "gpm": {
+      "structure": {
+        "chinese_characters": 4095,
+        "paragraphs": 43,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/2103.09762",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4095,
+        "paragraphs": 41,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 8,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ]
+      }
+    },
+    "emworld": {
+      "structure": {
+        "chinese_characters": 4255,
+        "paragraphs": 43,
+        "equations": 7,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://cvlab-liuyuanyuan.github.io/pdf/conferencepaper/2026_ICML_EmWorld.pdf",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4255,
+        "paragraphs": 43,
+        "equations": 7,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 3,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ],
+        "code_status": "未确认官方训练仓库；教学实现计划明确标注",
+        "source_conflicts": [
+          "Avg归一化公式",
+          "DUCT跨表数值",
+          "DFEW提升的对照方法称谓",
+          "ViT预训练数据表述"
+        ]
+      }
+    },
+    "ferv39k": {
+      "structure": {
+        "chinese_characters": 4278,
+        "paragraphs": 44,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "source": "https://arxiv.org/html/2203.09463",
+        "paper_read": "正文与补充材料已读取；来源版本在正文说明",
+        "style": "academic",
+        "chinese_chars": 4278,
+        "paragraphs": 44,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1,
+        "original_quote_words": 4,
+        "execution": "未运行论文训练；源码检查与教学验收计划明确区分",
+        "six_rounds": [
+          "全文阅读",
+          "仓库搜索与可用源码检查",
+          "机制与证据分析",
+          "沿用已选学术型",
+          "HTML内容撰写",
+          "结构与证据自检"
+        ],
+        "code_status": "官方仓库仅README及图片，无可核验训练代码",
+        "formula_status": "全部评价公式明确为教学整理",
+        "source_conflicts": [
+          "正文与比较表总量差异",
+          "主文与附录部分跨场景数字不同"
+        ]
+      }
+    },
+    "pcl": {
+      "structure": {
+        "chinese_characters": 4050,
+        "paragraphs": 39,
+        "equations": 6,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 12,
+        "source": "https://openaccess.thecvf.com/content/CVPR2023/html/Liu_Pose-Disentangled_Contrastive_Learning_for_Self-Supervised_Facial_Representation_CVPR_2023_paper.html",
+        "code_status": "作者PCL源码与配置已读，固定提交6e71d4110873；发现正交和损失分母等差异",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4050
+      }
+    },
+    "pcfrl": {
+      "structure": {
+        "chinese_characters": 4130,
+        "paragraphs": 40,
+        "equations": 7,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "full_text": true,
+        "pdf_pages": 19,
+        "source": "https://doi.org/10.1007/s11263-025-02348-z",
+        "code_status": "作者评估包已读，固定提交7af055681cfd；未核验到完整NPA训练链",
+        "workflow": [
+          "全文与附录",
+          "问题与概念",
+          "公式与机制",
+          "实验与消融",
+          "公开实现核对",
+          "初学者任务与局限"
+        ],
+        "chinese_chars": 4130
+      }
+    },
+    "resnet": {
+      "structure": {
+        "chinese_characters": 4550,
+        "paragraphs": 48,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4550,
+        "paragraphs": 48,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "a7026cb6d478e131b765b898c312e25f9f6dc031",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\resnet\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\resnet\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 7,
+        "pdf_pages": 12,
+        "figure_table_references": 10
+      }
+    },
+    "simclr": {
+      "structure": {
+        "chinese_characters": 4646,
+        "paragraphs": 47,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1
+      },
+      "evidence": {
+        "chinese_characters": 4646,
+        "paragraphs": 47,
+        "equations": 5,
+        "tables": 2,
+        "mermaid": 1,
+        "source_snippets": 2,
+        "repo_sha": "383d4143fd8cf7879ae10f1046a9baeb753ff438",
+        "full_text_local": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\simclr\\paper.txt",
+        "full_text_pdf": "D:\\Dolphin\\codex\\sc\\paper_analysis\\remaining\\foundations\\simclr\\paper.pdf",
+        "training_reproduced": false,
+        "style": "academic",
+        "workflow": "全文及补充材料、官方仓库README/核心实现/配置核查；作者观点与教学推导分开标注；结构与数字自查",
+        "quotes_words": 9,
+        "pdf_pages": 20,
+        "figure_table_references": 10
+      }
+    }
+  },
+  "pending": []
+}

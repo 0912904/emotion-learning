@@ -1,0 +1,239 @@
+{
+  "date": "2026-10-24",
+  "pages": [
+    {
+      "slug": "attention",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "bert",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "clip",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "wav2vec2",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "mult",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "almt",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 8,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "ch-sims",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "mosei",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "norm-tr",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 11,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "emer",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "ovmer",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "affectgpt",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "ecpa",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "cera",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "lora",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "est",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 10,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "dann",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "lwf",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "ewc",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "gpm",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "emworld",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 7,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "ferv39k",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "pcl",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 6,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "pcfrl",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 7,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "resnet",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    },
+    {
+      "slug": "simclr",
+      "diagramError": false,
+      "errors": 0,
+      "graphs": 1,
+      "math": 5,
+      "overflow": false,
+      "status": "公式已排版 · 可离线阅读"
+    }
+  ]
+}

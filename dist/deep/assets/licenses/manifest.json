@@ -1,0 +1,144 @@
+[
+  {
+    "name": "attention",
+    "repository": "https://github.com/tensorflow/tensor2tensor",
+    "commit": "bafdc1b67730430d38d6ab802cbd51f9d053ba2e",
+    "license_files": [
+      "attention-LICENSE.txt",
+      "attention-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "bert",
+    "repository": "https://github.com/google-research/bert",
+    "commit": "eedf5716ce1268e56f0a50264a88cafad334ac61",
+    "license_files": [
+      "bert-LICENSE.txt",
+      "bert-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "clip",
+    "repository": "https://github.com/openai/CLIP",
+    "commit": "d05afc436d78f1c48dc0dbf8e5980a9d471f35f6",
+    "license_files": [
+      "clip-LICENSE.txt",
+      "clip-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "mult",
+    "repository": "https://github.com/yaohungt/Multimodal-Transformer",
+    "commit": "a670936824ee722c8494fd98d204977a1d663c7a",
+    "license_files": [
+      "mult-LICENSE.txt",
+      "mult-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "resnet",
+    "repository": "https://github.com/KaimingHe/deep-residual-networks",
+    "commit": "a7026cb6d478e131b765b898c312e25f9f6dc031",
+    "license_files": [
+      "resnet-LICENSE.txt",
+      "resnet-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "simclr",
+    "repository": "https://github.com/google-research/simclr",
+    "commit": "383d4143fd8cf7879ae10f1046a9baeb753ff438",
+    "license_files": [
+      "simclr-LICENSE.txt",
+      "simclr-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "wav2vec2",
+    "repository": "https://github.com/facebookresearch/fairseq",
+    "commit": "3d262bb25690e4eb2e7d3c1309b1e9c406ca4b99",
+    "license_files": [
+      "wav2vec2-LICENSE.txt",
+      "wav2vec2-SOURCE_HEADERS.txt"
+    ]
+  },
+  {
+    "name": "dann",
+    "repository": "https://github.com/fungtion/DANN",
+    "commit": "476147f70bb818a63bb3461a6ecc12f97f7ab15e",
+    "license_files": [
+      "dann-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "ewc",
+    "repository": "https://github.com/moskomule/ewc.pytorch",
+    "commit": "c846fc6c7929963df241c402e2f3998f7f22b975",
+    "license_files": []
+  },
+  {
+    "name": "ferv39k",
+    "repository": "https://github.com/wangyanckxx/FERV39k",
+    "commit": "2395ffffa3dd62cdb31ab51da394c50c4d9c5cbc",
+    "license_files": []
+  },
+  {
+    "name": "gpm",
+    "repository": "https://github.com/sahagobinda/GPM",
+    "commit": "1a238ec9d2ca30bae8fd1707f161cc6bd093c72a",
+    "license_files": [
+      "gpm-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "lora",
+    "repository": "https://github.com/microsoft/LoRA",
+    "commit": "c4593f060e6a368d7bb5af5273b8e42810cdef90",
+    "license_files": [
+      "lora-LICENSE.md.txt"
+    ]
+  },
+  {
+    "name": "lwf",
+    "repository": "https://github.com/lizhitwo/LearningWithoutForgetting",
+    "commit": "795176d49017663ae76455e6536b4c2b7caf35fe",
+    "license_files": [
+      "lwf-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "mmsa",
+    "repository": "https://github.com/thuiar/MMSA.git",
+    "commit": "a94e65d07fa1ae0d44e552390074b29b0898edfd",
+    "license_files": [
+      "mmsa-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "pcl",
+    "repository": "https://github.com/DreamMr/PCL",
+    "commit": "6e71d4110873a434fa29dcd406607ec2ab5fe827",
+    "license_files": []
+  },
+  {
+    "name": "pcfrl",
+    "repository": "https://github.com/fulaoze/CV",
+    "commit": "7af055681cfd0d657574a68dd8ad1cf55582106f",
+    "license_files": []
+  },
+  {
+    "name": "affectgpt",
+    "repository": "https://github.com/zeroQiaoba/AffectGPT",
+    "commit": "95b9257758df29fa6481c138252cdd317cce1735",
+    "license_files": [
+      "affectgpt-AffectGPT-LICENSE.txt",
+      "affectgpt-OV-MER-LICENSE.txt"
+    ]
+  },
+  {
+    "name": "ecpa",
+    "repository": "https://github.com/virtuesvvy/ECPA_Emotional_Video_Captioning",
+    "commit": "8026d4032901725689d5af3994e5690a63f3e557",
+    "license_files": []
+  }
+]
