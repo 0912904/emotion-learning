@@ -1,0 +1,273 @@
+/* Motion & structure layer (2026-10-27).
+   Keeps the jade reading-room identity; every animation is gated by html.motion,
+   which motion.js only sets when JavaScript runs and reduced motion is not requested. */
+:root{--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--shadow-1:0 1px 2px #1028220a,0 6px 18px #1028220d;--shadow-2:0 2px 6px #1028220f,0 18px 40px #10282219;--jade-soft:#e3efe8;--indigo-soft:#ebebf7;--amber-soft:#f6ecdd;--warn:#9a4f22}
+
+/* ---------- Shell: sticky topbar with reading progress ---------- */
+.topbar{position:sticky;top:0;z-index:15;background:#f5f6f1d9;-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px);transition:box-shadow .3s}
+.topbar.scrolled{box-shadow:0 10px 28px -12px #10282229}
+.scroll-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--jade),#3f8f7a 55%,var(--indigo));transform-origin:0 50%;transform:scaleX(var(--p,0));pointer-events:none}
+#breadcrumb{display:inline-block;font-weight:600}
+html.motion #breadcrumb.swap{animation:crumb .45s var(--ease-out)}
+[id]{scroll-margin-top:96px}
+
+/* Sidebar: sliding active marker and responsive icons */
+.sidebar nav a{position:relative;transition:background .2s,color .2s}
+.sidebar nav a::before{content:"";position:absolute;left:0;top:50%;width:3px;height:22px;margin-top:-11px;border-radius:0 3px 3px 0;background:var(--jade);transform:scaleY(0);transition:transform .35s var(--ease-out)}
+.sidebar nav a.active::before{transform:scaleY(1)}
+.sidebar nav a .ic,.mobile-nav .ic{transition:transform .35s var(--ease-spring)}
+@media(hover:hover){.sidebar nav a:hover .ic{transform:translateX(2px) scale(1.08)}}
+html.motion .mobile-nav a.active .ic{animation:pop .45s var(--ease-spring)}
+.brand-mark{transition:transform .5s var(--ease-spring)}
+@media(hover:hover){.brand:hover .brand-mark{transform:rotate(-8deg) scale(1.05)}}
+
+/* ---------- Buttons & chips ---------- */
+.btn{position:relative;overflow:hidden;transition:background .18s,border-color .18s,transform .2s var(--ease-out),box-shadow .25s}
+.btn:active{transform:scale(.97)}
+.btn.primary{box-shadow:0 2px 0 #08493f26}
+.btn.primary::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff47 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+@media(hover:hover){.btn.primary:hover{box-shadow:0 10px 22px -8px #0f5c5280}html.motion .btn.primary:hover::after{transition:transform .75s var(--ease-out);transform:translateX(120%)}}
+.chip{transition:background .25s,color .25s,border-color .25s,transform .2s var(--ease-out),box-shadow .25s}
+.chip:active{transform:scale(.96)}
+.chip.active{box-shadow:0 6px 14px -6px #0f5c5266}
+
+/* ---------- Hero: ambient field, staged headline, live fusion ---------- */
+.hero{isolation:isolate;background:radial-gradient(#0f5c5214 1px,transparent 1.3px) 0 0/22px 22px,linear-gradient(120deg,#e8f1eb 0%,#eef1e6 55%,#ecebf5 100%)}
+.hero::before,.hero::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(46px);pointer-events:none}
+.hero::before{width:380px;height:380px;left:-90px;top:-150px;background:radial-gradient(circle,#b8dcc9 0,transparent 70%);opacity:.75}
+.hero::after{width:440px;height:440px;right:-130px;bottom:-210px;background:radial-gradient(circle,#d0cdef 0,transparent 70%);opacity:.8}
+html.motion .hero::before{animation:drift-a 17s ease-in-out infinite alternate}
+html.motion .hero::after{animation:drift-b 21s ease-in-out infinite alternate}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.hero h1 .line>span{display:inline-block}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--jade) 0%,#2f8a72 45%,var(--indigo) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+html.motion .hero h1 em{animation:sheen 7s ease-in-out infinite alternate}
+html.motion .hero.play h1 .line>span{animation:line-up .95s var(--ease-out) backwards}
+html.motion .hero.play h1 .line:nth-child(2)>span{animation-delay:.12s}
+html.motion .hero.play .hero-copy>p{animation:fade-up .8s var(--ease-out) .25s backwards}
+html.motion .hero.play .hero-copy>.actions{animation:fade-up .8s var(--ease-out) .35s backwards}
+html.motion .hero.play .hero-stats li{animation:fade-up .7s var(--ease-out) backwards;animation-delay:calc(.45s + var(--i,0) * 80ms)}
+html.motion .hero.play .fusion{animation:scale-in 1s var(--ease-out) .15s backwards}
+.hero-stats{list-style:none;display:flex;gap:30px;margin:24px 0 0;padding:16px 0 0;border-top:1px solid #0f5c5224}
+.hero-stats li{display:flex;flex-direction:column;min-width:0}
+.hero-stats b{font-size:26px;line-height:1.15;font-weight:650;color:var(--jade);font-variant-numeric:lining-nums tabular-nums}
+.hero-stats small{font-size:12px;color:var(--ink-2);white-space:nowrap}
+
+.fusion-flow path{fill:none;stroke:var(--jade);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:.012 .07;opacity:0;transition:opacity .45s}
+.fusion[data-on~="t"] .fusion-flow .t,.fusion[data-on~="a"] .fusion-flow .a,.fusion[data-on~="v"] .fusion-flow .v{opacity:.9}
+html.motion .fusion-flow path{animation:flow 1.5s linear infinite}
+.fusion-core{box-shadow:0 14px 30px -12px #0f5c5299}
+.fusion-core::before{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px solid #0f5c5238;pointer-events:none}
+.fusion-core::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--jade);opacity:0;pointer-events:none}
+.fusion-core strong{display:block}
+html.motion .fusion-core::before{animation:breathe 3.4s ease-in-out infinite}
+html.motion .fusion-core.bump{animation:core-bump .6s var(--ease-spring)}
+html.motion .fusion-core.bump::after{animation:ripple .9s var(--ease-out)}
+html.motion .fusion-core.bump strong{animation:fade-up .45s var(--ease-out)}
+html.motion .fusion-evidence.bump{animation:ev-in .45s var(--ease-out)}
+.fusion-node{transition:background .2s,border-color .2s,box-shadow .3s}
+.fusion-node[aria-pressed="true"]{box-shadow:0 8px 18px -10px #0f5c5299}
+html.motion .fusion-node{animation:float 6s ease-in-out infinite}
+html.motion .fusion-node:nth-of-type(2){animation-delay:-2s}
+html.motion .fusion-node:nth-of-type(3){animation-delay:-4s}
+
+/* ---------- Reveal on scroll (only when navigating, never on in-place updates) ---------- */
+html.motion [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out),transform .75s var(--ease-out);transition-delay:var(--d,0ms)}
+html.motion [data-reveal].is-in{opacity:1;transform:none}
+html.motion #paper-results.refresh{animation:fade-in .35s ease}
+
+/* ---------- Cards: lift + pointer spotlight ---------- */
+.track-card,.paper,.week,.note-card{position:relative;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),border-color .25s}
+.track-card::after,.paper::after,.week::after,.note-card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),#0f5c5214,transparent 45%);opacity:0;transition:opacity .35s}
+.dir-cross.track-card::after,.week.dir-cross::after{background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),#4b4a9c17,transparent 45%)}
+.lab-card{transition:box-shadow .35s var(--ease-out),border-color .25s}
+@media(hover:hover){
+ .track-card:hover,.paper:hover,.note-card:hover,.week:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:#a3bfb1}
+ .track-card:hover::after,.paper:hover::after,.week:hover::after,.note-card:hover::after{opacity:1}
+ .lab-card:hover{box-shadow:var(--shadow-1);border-color:#a3bfb1}
+}
+
+/* ---------- Resume strip ---------- */
+.resume-context::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--jade);margin-right:8px;vertical-align:middle;position:relative;top:-1px}
+html.motion .resume-context::before{animation:ping-dot 2s var(--ease-out) infinite}
+.ring-value{transition:stroke-dashoffset 1.2s var(--ease-out)}
+.ring-wrap::before{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px dashed #0f5c5240;pointer-events:none}
+html.motion .ring-wrap::before{animation:spin 28s linear infinite}
+.progress-track>div{transition:width .9s var(--ease-out)}
+.section-sub{margin:-6px 0 16px;font-size:13px;color:var(--ink-2)}
+
+/* ---------- Milestone timeline: where you are on the route ---------- */
+.milestones{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.milestone{position:relative}
+/* Each segment links this phase's dot to the next one and fills with this phase's real progress (--seg). */
+.milestone:not(:last-child)::before,.milestone:not(:last-child)::after{content:"";position:absolute;top:13px;left:calc(50% + 18px);width:calc(100% - 20px);height:2px;border-radius:2px;background:#d3ddd5}
+.milestone:not(:last-child)::after{background:linear-gradient(90deg,var(--jade),#3f8f7a);transform-origin:0 50%;transform:scaleX(var(--seg,0));transition:transform 1s var(--ease-out);transition-delay:calc(var(--i,0) * .28s + .15s)}
+html.motion .milestones:not(.is-in) .milestone::after{transform:scaleX(0)}
+.milestone>a{display:block;height:100%;color:inherit;text-align:center;padding:0 6px 10px;border-radius:12px;transition:background .25s}
+@media(hover:hover){.milestone>a:hover{background:#ffffffa6}.milestone>a:hover .milestone-dot{transform:scale(1.12)}}
+.milestone-dot{display:grid;place-items:center;width:28px;height:28px;margin:0 auto 12px;border-radius:50%;background:var(--bg);border:2px solid #bccbc1;position:relative;z-index:1;font-size:12px;font-weight:700;color:var(--ink-2);transition:transform .35s var(--ease-spring),background .3s,border-color .3s}
+.milestone.is-done .milestone-dot{background:var(--jade);border-color:var(--jade);color:#fff}
+.milestone.is-current .milestone-dot{background:#fff;border-color:var(--jade);color:var(--jade)}
+html.motion .milestone.is-current .milestone-dot::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--jade);animation:ping 2.2s var(--ease-out) infinite}
+.milestone.is-skip{opacity:.55}
+.milestone small{font-size:12px;color:var(--ink-2)}
+.milestone h3{font-size:15px;margin:4px 0}
+.milestone p{font-size:12px;color:var(--ink-2);margin:0 0 8px}
+.milestone-count{display:inline-block;font-size:11px;padding:1px 9px;border-radius:999px;background:#e6eee8;color:var(--jade);font-variant-numeric:tabular-nums}
+.milestone.dir-cross .milestone-count{background:var(--indigo-soft);color:var(--indigo)}
+.milestone.dir-common .milestone-count,.milestone.dir-research .milestone-count{background:var(--amber-soft);color:var(--amber)}
+.milestone .here{display:block;font-style:normal;font-size:12px;font-weight:650;color:var(--jade);margin-top:6px}
+
+/* Direction cards: progress-lit path */
+.path-steps{list-style:none;display:flex;flex-wrap:wrap;row-gap:6px;padding:14px 0 0;margin:0;border-top:1px solid var(--line)}
+.path-steps li{display:flex;align-items:center;font-size:12px;color:var(--ink-2)}
+.path-steps li::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;margin-right:6px;opacity:.65;transition:background .3s,transform .3s var(--ease-spring)}
+.path-steps li:not(:last-child)::after{content:"";width:18px;height:2px;margin:0 8px;background:linear-gradient(90deg,currentColor 50%,transparent 0) 0 0/6px 100%;opacity:.45}
+.path-steps li.lit{color:var(--jade);font-weight:600}
+.path-steps li.lit::before{background:currentColor;opacity:1}
+.dir-cross .path-steps li.lit{color:var(--indigo)}
+html.motion .track-card:hover .path-steps li:not(:last-child)::after{animation:march .7s linear infinite}
+html.motion .track-card:hover .path-steps li::before{animation:step-pop .5s var(--ease-spring) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+.track-meter{display:grid;gap:6px;font-size:12px;color:var(--ink-2);margin:14px 0 4px}
+.track-card .track-meter .track-position{margin:0}
+.milestone.is-skip .here{color:var(--ink-2);font-weight:500}
+.dir-cross .progress-track>div{background:var(--indigo)}
+
+/* ---------- Roadmap: phases, forks and the next step ---------- */
+.phase{margin-top:30px}
+.phase-head{display:grid;grid-template-columns:auto minmax(0,1fr) 190px;gap:18px;align-items:center;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.phase-index{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:var(--amber-soft);color:var(--amber);font-weight:700;font-size:19px;font-variant-numeric:tabular-nums}
+.dir-fine .phase-index{background:var(--jade-soft);color:var(--jade)}
+.dir-cross .phase-index{background:var(--indigo-soft);color:var(--indigo)}
+.phase-head h2{margin:0;font-size:19px}
+.phase-head h2 small{font-size:12px;font-weight:500;color:var(--ink-2);margin-left:10px}
+.phase-head p{margin:2px 0 0;font-size:13px;color:var(--ink-2)}
+.phase-progress{font-size:12px;color:var(--ink-2);text-align:right}
+.phase-progress strong{font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.phase-progress .progress-track{margin-top:6px}
+.dir-common .progress-track>div,.dir-research .progress-track>div{background:#b07b3d}
+.phase-fork{display:flex;align-items:center;gap:14px;margin:34px 0 0;font-size:13px;color:var(--ink-2)}
+.phase-fork::before,.phase-fork::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,#a7bbae 50%,transparent 0) 0 0/12px 2px}
+html.motion .phase-fork::before,html.motion .phase-fork::after{animation:march 1.4s linear infinite}
+.phase-fork span{padding:6px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);text-align:center}
+.phase-fork b.a{color:var(--jade)}.phase-fork b.b{color:var(--indigo)}
+.week.is-next{border-color:var(--jade);box-shadow:0 0 0 3px #0f5c521f}
+.next-badge{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:650;color:var(--jade);background:var(--jade-soft);padding:2px 10px;border-radius:999px;z-index:1}
+.next-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+html.motion .next-badge::before{animation:ping-dot 1.6s var(--ease-out) infinite}
+.week.done .week-num{color:var(--jade)}
+.week-papers{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-4px 0 12px;font-size:12px;color:var(--ink-2)}
+.paper-chip{border:1px solid var(--line);background:var(--bg);color:var(--jade);border-radius:999px;padding:2px 11px;font-size:12px;min-height:30px;font-variant-numeric:tabular-nums;transition:background .2s,color .2s,border-color .2s,transform .2s var(--ease-out)}
+.paper-chip:hover{background:var(--jade);border-color:var(--jade);color:#fff;transform:translateY(-1px)}
+.week.dir-cross .paper-chip{color:var(--indigo)}.week.dir-cross .paper-chip:hover{background:var(--indigo);border-color:var(--indigo);color:#fff}
+
+/* Paper reading state */
+.paper-meta{display:inline-flex;align-items:center;gap:10px}
+.status-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:1px 9px;border-radius:999px}
+.status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.status-pill.reading{background:var(--indigo-soft);color:var(--indigo)}
+.status-pill.read{background:var(--jade-soft);color:var(--jade)}
+html.motion .status-pill.reading::before{animation:ping-dot 1.6s var(--ease-out) infinite}
+
+/* ---------- Lab: animated bars, forgetting matrix, worked formulas ---------- */
+.bar-fill{transition:width .9s var(--ease-out),background .25s}
+.threshold-mark{transition:left .12s linear}
+.bar-row{transition:color .2s}
+.bar-row.on{color:var(--jade);font-weight:650}
+.lab-card{min-width:0}
+.cl-viz{display:grid;gap:10px;margin:20px 0 14px}
+.cl-legend{display:flex;gap:16px;font-size:12px;color:var(--ink-2)}
+.cl-legend i{display:inline-block;width:12px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.cl-legend .first{background:#4b4a9c1f;border-right:2px solid var(--indigo)}
+.cl-legend .final{background:var(--jade)}
+.cl-legend .drop{background:#b8713f}
+.cl-row{display:grid;grid-template-columns:52px minmax(0,1fr) 66px;gap:10px;align-items:center;font-size:12px}
+.cl-track{position:relative;height:18px;background:#edf0e9;border-radius:4px;overflow:hidden}
+.cl-first{position:absolute;inset:0 auto 0 0;background:#4b4a9c1a;border-right:2px solid var(--indigo)}
+.cl-final{position:absolute;left:0;top:4px;bottom:4px;border-radius:0 3px 3px 0;background:var(--jade);transition:width .35s var(--ease-out),background .25s}
+.cl-row.drop .cl-final{background:#b8713f}
+.cl-delta{text-align:right;font-weight:650;font-variant-numeric:tabular-nums}
+.cl-delta.neg{color:var(--warn)}.cl-delta.pos{color:var(--jade)}
+.formula{font-family:Consolas,'Cascadia Mono',monospace;font-size:12.5px;line-height:1.95;background:#f3f6f0;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:0 0 14px;overflow-x:auto;white-space:nowrap;color:var(--ink)}
+.formula b{color:var(--jade)}
+.result-box{transition:background .3s,color .3s}
+.result-box.warn{background:#f8eee3;color:#7a4515}
+.lab-metrics>div{transition:background .3s}
+.lab-metrics.warn #metric-bwt,.lab-metrics.warn #metric-f{color:var(--warn)}
+
+/* ---------- Quiz ---------- */
+.quiz-dots{display:flex;gap:6px;margin-top:14px}
+.quiz-dots i{flex:1;height:6px;border-radius:6px;background:#e1e8e0;transition:background .4s}
+.quiz-dots i.ok{background:var(--jade)}.quiz-dots i.miss{background:#c98a5e}.quiz-dots i.now{background:#9fc2b2}
+html.motion .quiz-dots i.now{animation:breathe-bar 1.4s ease-in-out infinite}
+html.motion .quiz-question.fresh{animation:fade-up .5s var(--ease-out)}
+html.motion .options.fresh .option{animation:fade-up .45s var(--ease-out) backwards;animation-delay:calc(var(--i,0) * 70ms + 80ms)}
+.option{transition:border-color .2s,background .2s,transform .25s var(--ease-out),box-shadow .25s}
+@media(hover:hover){.option:not(:disabled):hover{border-color:var(--jade);transform:translateX(4px);box-shadow:var(--shadow-1)}}
+html.motion .option.picked.correct{animation:pop .5s var(--ease-spring)}
+html.motion .option.picked.wrong{animation:shake .45s ease}
+html.motion .feedback{animation:fade-up .45s var(--ease-out)}
+
+/* ---------- Overlays ---------- */
+#toast{transform:translateY(14px) scale(.96);transition:opacity .25s,transform .45s var(--ease-spring);box-shadow:var(--shadow-2)}
+#toast.visible{transform:none}
+html.motion dialog#reader[open]{animation:drawer-in .45s var(--ease-out)}
+html.motion dialog[open]::backdrop{animation:fade-in .35s ease}
+html.motion #more-menu[open]{animation:pop-in .35s var(--ease-spring)}
+.lesson-part{transition:border-color .2s,box-shadow .3s}
+.lesson-part[open]{box-shadow:var(--shadow-1)}
+@media(hover:hover){.lesson-part:hover{border-color:#a3bfb1}}
+html.motion .lesson-part[open]>.lesson-text{animation:fade-up .4s var(--ease-out)}
+.burst{position:fixed;width:0;height:0;pointer-events:none;z-index:300}
+.burst i{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:2px;background:var(--c);animation:burst .85s var(--ease-out) forwards}
+
+/* ---------- Keyframes ---------- */
+@keyframes fade-up{from{opacity:0;transform:translateY(12px)}}
+@keyframes fade-in{from{opacity:0}}
+@keyframes scale-in{from{opacity:0;transform:scale(.94)}}
+@keyframes line-up{from{transform:translateY(108%)}}
+@keyframes crumb{from{opacity:0;transform:translateX(-8px)}}
+@keyframes drift-a{to{transform:translate(130px,70px) scale(1.18)}}
+@keyframes drift-b{to{transform:translate(-100px,-60px) scale(1.12)}}
+@keyframes sheen{to{background-position:100% 0}}
+@keyframes flow{to{stroke-dashoffset:-.164}}
+@keyframes float{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 4px))}}
+@keyframes breathe{50%{transform:scale(1.07);opacity:.45}}
+@keyframes core-bump{40%{transform:translate(-50%,-50%) scale(1.08)}}
+@keyframes ripple{from{opacity:.7;transform:scale(1)}to{opacity:0;transform:scale(1.65)}}
+@keyframes ev-in{from{opacity:0;transform:translate(-50%,calc(-50% + 8px))}}
+@keyframes ping{0%{transform:scale(.85);opacity:.8}100%{transform:scale(1.55);opacity:0}}
+@keyframes ping-dot{0%{box-shadow:0 0 0 0 currentColor}100%{box-shadow:0 0 0 7px transparent}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes march{to{background-position:12px 0}}
+@keyframes step-pop{0%{transform:scale(.4)}60%{transform:scale(1.35)}}
+@keyframes pop{40%{transform:scale(1.035)}}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+@keyframes breathe-bar{50%{opacity:.45}}
+@keyframes drawer-in{from{transform:translateX(56px);opacity:0}}
+@keyframes pop-in{from{opacity:0;transform:scale(.92) translateY(10px)}}
+@keyframes burst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.3) rotate(160deg);opacity:0}}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1100px){.phase-head{grid-template-columns:auto minmax(0,1fr) 150px}.hero-stats{gap:20px}}
+@media(max-width:760px){
+ .hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ .hero-stats b{font-size:22px}
+ .milestones{grid-template-columns:1fr;gap:0}
+ .milestone:not(:last-child)::before,.milestone:not(:last-child)::after{left:13px;top:32px;bottom:4px;width:2px;height:auto}
+ .milestone:not(:last-child)::after{transform-origin:50% 0;transform:scaleY(var(--seg,0))}
+ html.motion .milestones:not(.is-in) .milestone::after{transform:scaleY(0)}
+ .milestone>a{display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:14px;text-align:left;padding:0 0 18px}
+ .milestone>a>*:not(.milestone-dot){grid-column:2}
+ .milestone-dot{margin:0;grid-row:1/span 5}
+ .milestone .milestone-count{justify-self:start}
+ .phase-head{grid-template-columns:auto minmax(0,1fr);gap:12px 14px}
+ .phase-progress{grid-column:1/-1;text-align:left}
+ .phase-head h2 small{display:block;margin:0}
+ .phase-fork span{font-size:12px}
+ .paper-chip{min-height:36px}
+ .cl-row{grid-template-columns:46px minmax(0,1fr) 58px}
+ .formula{font-size:11.5px}
+ .next-badge{top:12px;right:12px}
+}
+@media print{.topbar{position:static}.scroll-progress,.burst{display:none}html.motion [data-reveal]{opacity:1!important;transform:none!important}}

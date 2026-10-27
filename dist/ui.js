@@ -66,6 +66,8 @@ function enhancePage(){
     fusion.querySelector(`[data-modality="${m}"]`).setAttribute('aria-pressed',String(on.has(m)));
     const [verdict,why]=outputs[['t','a','v'].filter(x=>on.has(x)).join('')];
     fusion.querySelector('#fusion-verdict').textContent=verdict;fusion.querySelector('#fusion-why').textContent=why;
+    // Restart the pulse so each change of evidence visibly updates the judgement.
+    [fusion.querySelector('.fusion-core'),fusion.querySelector('#fusion-why')].forEach(el=>{el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump');});
   };
   fusion.addEventListener('click',e=>{const b=e.target.closest('[data-modality]:not(:disabled)');if(b){touched=true;fusionTimers.forEach(clearTimeout);toggle(b.dataset.modality);}});
   // One optional explanatory sequence per document, cancelled by any interaction or route change.
@@ -79,8 +81,8 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('change',e=>{
   const el=e.target;
-  if(el.dataset.readingState){const id=el.dataset.readingState;state.papers=state.papers.filter(x=>x!==id);state.inProgress=state.inProgress.filter(x=>x!==id);if(el.value==='read')state.papers.push(id);if(el.value==='reading')state.inProgress.push(id);save();document.querySelector('#paper-results').innerHTML=paperCards();toast(id+' 已更新为'+el.options[el.selectedIndex].text);}
-  if(el.dataset.handbookCheck){state.checks[el.dataset.handbookCheck]=el.checked;save();toast(el.checked?'已记下这项完成记录':'已取消勾选');}
+  if(el.dataset.readingState){const id=el.dataset.readingState;if(el.value==='read'&&typeof celebrate==='function')celebrate(el);state.papers=state.papers.filter(x=>x!==id);state.inProgress=state.inProgress.filter(x=>x!==id);if(el.value==='read')state.papers.push(id);if(el.value==='reading')state.inProgress.push(id);save();document.querySelector('#paper-results').innerHTML=paperCards();toast(id+' 已更新为'+el.options[el.selectedIndex].text);}
+  if(el.dataset.handbookCheck){if(el.checked&&typeof celebrate==='function')celebrate(el);state.checks[el.dataset.handbookCheck]=el.checked;save();toast(el.checked?'已记下这项完成记录':'已取消勾选');}
 });
 window.addEventListener('storage',e=>{
   if(!window.learningReady||e.key!==KEY)return;
