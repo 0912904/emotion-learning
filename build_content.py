@@ -45,8 +45,8 @@ for match in re.finditer(r'<a id="(s\d+)"></a>\s*## ([^\n]+)\n(.*?)(?=<a id="s\d
 papers=[]
 for match in re.finditer(r'### (P\d+)｜([^\n]+)\n(.*?)(?=\n### P|\n<a id="s7"|\Z)',md,re.S):
     n=int(match[1][1:]); body=match[3].strip()
-    group='common' if n in [1,2,5,6,7,8,25,26] else 'fine' if n in [3,4,9,10,11,12,13,14,15] else 'cross'
-    core=n in [1,2,6,7,8,10,11,12,13,14,16,18,19,21,22]
+    group='common' if n in [1,2,5,6,7,8,25,26,29,36] else 'fine' if n in [3,4,9,10,11,12,13,14,15,27,28,30] else 'cross'
+    core=n in [1,2,6,7,8,10,11,12,13,14,16,18,19,21,22,27,28,29,31,32,33,36]
     problem=re.search(r'\*\*问题：\*\*\s*([^\n]+)',body)
     papers.append(dict(id=match[1],title=match[2],group=group,core=core,summary=problem[1] if problem else '',meta=body.splitlines()[0],html=render(body)))
 def load_lessons(filename, prefix):

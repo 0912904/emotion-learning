@@ -162,6 +162,7 @@ html.motion .next-badge::before{animation:ping-dot 1.6s var(--ease-out) infinite
 .week.dir-cross .paper-chip{color:var(--indigo)}.week.dir-cross .paper-chip:hover{background:var(--indigo);border-color:var(--indigo);color:#fff}
 
 /* Paper reading state */
+.tag.new{background:#fbe7da;color:#8a3b12}
 .paper-meta{display:inline-flex;align-items:center;gap:10px}
 .status-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:1px 9px;border-radius:999px}
 .status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}

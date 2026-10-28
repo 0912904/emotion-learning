@@ -7,5 +7,5 @@ const migrated=JSON.parse(JSON.stringify(ctx.check(old)));
 assert.deepEqual(migrated.weeks,[1,28]);assert.deepEqual(migrated.papers,['P06']);assert.equal(migrated.notes.journal,old.notes.journal);assert.equal(migrated.notes.P06,old.notes.P06);assert.deepEqual(migrated.inProgress,[]);assert.deepEqual(migrated.checks,{});
 const extended=ctx.check({...old,inProgress:['P06','P07','P07','evil'],checks:{'s11:读第一条样本':true,bad:'yes'},lastVisited:{type:'paper',id:'P07'},lastExportAt:'2026-10-24T12:00:00Z'});
 assert.deepEqual([...extended.inProgress],['P07']);assert.equal(extended.checks['s11:读第一条样本'],true);assert.equal(extended.lastVisited.id,'P07');assert.equal(extended.quizBest,5);
-assert.throws(()=>ctx.check(null));assert.equal(ctx.check({notes:{journal:'a'.repeat(21000)},quizBest:100}).notes.journal.length,20000);assert.equal(ctx.check({quizBest:100}).quizBest,8);
+assert.throws(()=>ctx.check(null));assert.equal(ctx.check({notes:{journal:'a'.repeat(21000)},quizBest:100}).notes.journal.length,20000);assert.equal(ctx.check({quizBest:100}).quizBest,12);assert.deepEqual([...ctx.check({papers:['P27','P36','P37']}).papers],['P27','P36']);
 console.log('PASS: legacy progress and notes preserved; extended states round-trip; invalid IDs and oversize notes bounded.');
