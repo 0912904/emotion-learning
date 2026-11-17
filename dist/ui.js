@@ -4,7 +4,7 @@ let fusionTimers=[],fusionDemoPlayed=false;
 const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)');
 function markReading(id){
   state.lastVisited={type:'paper',id};
-  if(!state.papers.includes(id)&&!state.inProgress.includes(id))state.inProgress.push(id);
+  if(!window.sharedProgressEnabled&&!state.papers.includes(id)&&!state.inProgress.includes(id))state.inProgress.push(id);
   save();
 }
 function enhanceProse(scope){
@@ -88,7 +88,7 @@ window.addEventListener('storage',e=>{
   if(!window.learningReady||e.key!==KEY)return;
   // Flush a focused note first so a remote update cannot erase uncommitted input.
   const focused=document.activeElement, noteId=focused?.dataset?.note, value=focused?.value;
-  try{state=validate(JSON.parse(e.newValue||'null')||blank());storageOK=true;
+  try{state=validate(JSON.parse(e.newValue||'null')||blank());window.sharedAfterImport?.();storageOK=true;
     if(noteId){if(state.notes[noteId]!==value){state.notes[noteId]=value;toast('另一标签页已更新；当前正在编辑的文字已保留，请继续编辑后保存。');}return;}
     if(document.querySelector('#reader').open){const n=document.querySelector('#reader [data-note]');if(n)n.value=state.notes[n.dataset.note]||'';document.querySelectorAll('#reader [data-week-check]').forEach(c=>c.checked=state.weeks.includes(+c.dataset.weekCheck));document.querySelectorAll('#reader [data-paper-check]').forEach(c=>c.checked=state.papers.includes(c.dataset.paperCheck));}
     if(document.activeElement?.id==='paper-search')return;
