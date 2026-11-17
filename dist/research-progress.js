@@ -1,7 +1,7 @@
 'use strict';
 // Dated research snapshot, independent of the visitor's own checklist and notes.
 function researchProgress(){return `<section class="research-progress" aria-labelledby="research-progress-title">
-<div class="research-progress-head"><div><p class="research-progress-date">研究进度快照 · 截至 2026-11-14</p><h2 id="research-progress-title">当前：以 W11 时序对照和 W09 标签核验为主</h2><p>已有实验与每周知识验收分别记录</p></div><a class="btn small" href="#roadmap">查看逐周路线 →</a></div>
+<div class="research-progress-head"><div><p class="research-progress-date">研究进度快照</p><h2 id="research-progress-title">当前：以 W11 时序对照和 W09 标签核验为主</h2><p>已有实验与每周知识验收分别记录</p></div><a class="btn small" href="#roadmap">查看逐周路线 →</a></div>
 <div class="research-progress-grid">
 <article><span class="progress-label">W01—W08 · 复现与消融已有成果</span><h3>复现 ALMT 数据流和实验结果</h3><p>CH-SIMS 三种子对照：完整模型平均 MAE 0.4221，纯文本 0.4186，文本＋视觉 0.4310，文本＋音频 0.4307；三种子不足以证明统计显著性。MOSEI 单种子简化实验测试 MAE 0.5365。</p><p>下一步：画出三路输入、融合与输出，解释指标、数据划分和消融限制。纯文本误差更低，不能直接证明音视频没有作用。</p><button class="btn small" data-week="7">W07 数据流 →</button> <button class="btn small" data-week="8">W08 消融 →</button></article>
 <article><span class="progress-label">W11 · 优先推进</span><h3>比较帧平均与小型时序模块</h3><p>在 CH-SIMS v2.0 的视频级划分上，单种子探索中固定融合测试 MAE 为 0.4746，门控融合为 0.5036；两者使用相同辅助监督。现阶段门控未优于固定融合。此前多数源视频已用于探索，结果不是全新独立数据上的最终结论。</p><ol><li>固定视频划分、CLIP 权重与抽帧位置，记录样本 ID。</li><li>重新缓存逐帧特征；现有缓存是每段平均后的特征，不能恢复帧顺序。</li><li>相同数据与验证规则下比较「均值池化＋回归头」和「小型时序模块＋回归头」，先短跑测耗时。</li><li>保存配置、逐样本预测与对照表；报告探索性质。</li></ol><button class="btn small" data-week="11">打开 W11 任务单 →</button></article>
