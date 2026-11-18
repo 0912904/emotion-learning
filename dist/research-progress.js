@@ -8,4 +8,4 @@ function researchProgress(){return `<section class="research-progress" aria-labe
 <article><span class="progress-label">W09 · 并行准备</span><h3>MOSEI 六情绪标签：先解决映射</h3><p>已有候选情绪文件按原视频时间区间组织，本地片段使用 video_id / clip_id；缺少可信的片段起止时间映射。文本匹配与时长抽查存在差异，原因未确定，候选标签不能直接用于训练。</p><p>下一步：查找原始切分脚本或 ID—起止时间表，核对划分、文本、时间及音视频；对齐后再统计六类标签并进入 W10。找不到映射时，仍可使用现有情感分数继续实验。</p><button class="btn small" data-week="9">打开 W09 任务单 →</button></article>
 <article><span class="progress-label">W12 · 人工核查</span><h3>回看 10—20 条多模态样本</h3><p>从可播放的 CH-SIMS 验证样本中记录 ID、文本内容、声音和画面中的可观察线索、标注是否一致，以及不确定之处。模型预测只是线索；自然冲突需要结合原始内容核查。</p><p>MOSEI 冻结 CLIP 的文本、视频与简单融合小样本流程已跑通；候选视频读取失败较多，视频内容与标签尚待抽查，因此只能说明流程探索，不能作为可靠跨数据集结论。</p><button class="btn small" data-week="12">打开 W12 任务单 →</button></article>
 <article><span class="progress-label">后续条件与边界</span><h3>标签核验后再训练六情绪模型</h3><p>MOSEI 已有情感分数可用于当前任务；高兴、悲伤等六类情绪监督需先可靠对齐。MAFW 到位后再核对视频、类别与描述，建立表情分类基线。跨场景持续学习留待场景划分和基线明确后开展。</p><p>CLIP 属于冻结预训练编码器的下游试验；固定和门控融合对照还需多个划分和种子。仅凭标注不一致分组，不能断言模型错误由模态冲突造成。</p></article>
-</div><p class="research-progress-note">依据：“制定论文复现计划”任务最新记录、CH-SIMS 融合实验摘要、MOSEI 标签对齐审计和 CLIP 试跑记录</p></section>`;}
+</div></section>`;}
