@@ -28,7 +28,7 @@ p('三路输入各为 T×N_a、T×N_v、T×N_t，投影后各为 T×N。把它�
 eq(r"F^{NR}=\operatorname{MLP}_{NR}(U';\theta_{NR})\in\mathbb R^{3T\times N/2}",'原文 Eq.3：共享 NRGF','θ_NR 为共享参数。原文使用两层全连接与 Leaky-ReLU，并把宽度从N压为N/2。名称中的“Generic”指通过学习得到跨模态、抗干扰的表示，不是取三路平均，也不是一个人为写好的情绪模板。')
 p('每个位置的 MLP 主要做特征维变换，复杂时间关系由后面的 Transformer 建立。降低宽度可以减少后续成本，但“压缩了”不等于“过滤正确了”。如果非常细的情绪线索也被压掉，任务会受损。这正是作者同时保留另一条分支的理由：以稳定性作为唯一目标，可能丢失有用但模态特有的信息。')
 eq(r"F^M=\operatorname{MLP}_{M}(U';\theta_*)\in\mathbb R^{3T\times N/2},\quad *\in\{a,v,t\}",'原文 Eq.4：三路独立 MF','θ_* 是各模态自己的参数。MF 的层形式与共享分支相似，但三种模态分别学习，并且没有被要求满足同样的抗噪一致性目标。两路形状相同，含义与优化约束不同；形状相同从来不证明信息相同。')
-parts.append('<pre class="mermaid">flowchart TD\n U[Precomputed T A V] --> MASK[Temporal masking]\n MASK --> G[Three projections]\n G --> NR[Shared MLP: NRGF]\n G --> MF[Separate MLPs: MF]\n NR -->|Q| AT[Cross attention]\n MF -->|K and V| AT\n AT --> POOL[Mean pooling and prediction]\n NR --> GRL[Gradient reversal]\n MF --> D1[Modality discriminator]\n GRL --> D1\n GRL --> D2[Noise discriminator]</pre><p class="caption">教学重绘：依据原文 Figure 2、Figure 4 整理数据与训练约束，省略残差、投影及判别前的形状处理；不替代原模型图。</p>')
+parts.append('<pre class="mermaid">flowchart TD\n U[Precomputed T A V] --> MASK[Temporal masking]\n MASK --> G[Three projections]\n G --> NR[Shared MLP: NRGF]\n G --> MF[Separate MLPs: MF]\n NR -->|Q| AT[Cross attention]\n MF -->|K and V| AT\n AT --> POOL[Mean pooling and prediction]\n NR --> GRL[Gradient reversal]\n MF --> D1[Modality discriminator]\n GRL --> D1\n GRL --> D2[Noise discriminator]</pre><p class="caption">教学重绘：依据原文 Figure 2、Figure 4 整理数据与训练约束，省略残差、投影及判别前的形状处理；</p>')
 
 section('fusion','04 · 为什么让公共表示作 Query？')
 eq(r"\operatorname{Trans}(\cdot)=\operatorname{Trans}(q=F^{NR},k/v=F^M)",'原文 Eq.5：融合方向','q是查询，k是匹配键，v是读出的值。NRGF决定要找什么，MF提供可读取的细节。与ALMT以语言为主要引导不同，这里查询来自三模态公共表示；两者都使用交叉注意力，但查询的形成方式和训练目标不同。')
@@ -52,7 +52,7 @@ eq(r"\mathcal L=\alpha\mathcal L_{adv-1}+\beta\mathcal L_{adv-2}+\gamma\mathcal 
 p('期刊版§4.7.14另做MOSEI六情绪多标签，使用Sigmoid与BCE。每个类别有独立是否存在的判断，允许同时开心与惊讶；这与七档情感倾向分箱不同。你拓展ALMT时必须同步修改标签读取、输出维度、损失与指标，并在验证集确定阈值，不能只把回归头的1改成6。')
 
 section('code','07 · 代码核查：哪些能直接对照，哪些只能教学实现？')
-p('截至2026-10-23，在全文、作者主页、作者GitHub以及论文标题／NRGF检索中，未找到可确认的NORM-TR官方公开实现。准确表述是“本次未定位到官方代码”，而非证明它从未发布。因而也没有可核验的官方checkpoint、预处理入口与D2编码；本页不把自写网络称为论文复现。')
+p('截至2026-10-23，在全文、作者主页、作者GitHub以及论文标题／NRGF检索中，未找到可确认的NORM-TR官方公开实现。准确表述是“本次未定位到官方代码”，而非证明它从未发布。因而也没有可核验的官方checkpoint、预处理入口与D2编码；自写网络用于机制练习。')
 p('按skill要求继续查找替代参考，已浅克隆同一作者公开的LNLN仓库，阅读README、models/basic_layers.py、models/lnln.py、core/dataset.py和configs/train_mosi.yaml。它属于另一篇论文，具有独立语言主导、补全与缺失机制。其README及配置都不应拿来替代NORM-TR的参数。这里仅摘录通用GRL实现来说明§3.5.2；缺失数据生成也不同，LNLN的逐位置随机缺失不等于本文连续窗擦除。')
 code_root=ROOT.parent.parent/'paper_analysis/norm-tr/related-code'
 sha='80a052c62b7b3b7a6cb6956846e9d9c121f56eda'
