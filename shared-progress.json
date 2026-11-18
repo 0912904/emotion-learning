@@ -1,1 +1,19 @@
-{"version":1,"initialized":false,"weeks":[],"papers":[],"inProgress":[]}
+{
+  "version": 1,
+  "initialized": true,
+  "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "papers": [],
+  "inProgress": [
+    "P03"
+  ]
+}
