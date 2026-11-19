@@ -2,9 +2,9 @@
   "pages": [
     {
       "page": "affectgpt-rl.html",
-      "display_math": 5,
-      "inline_math": 10,
-      "links": 26
+      "display_math": 6,
+      "inline_math": 17,
+      "links": 34
     },
     {
       "page": "affectgpt.html",
@@ -14,9 +14,9 @@
     },
     {
       "page": "agent-mer.html",
-      "display_math": 0,
-      "inline_math": 0,
-      "links": 23
+      "display_math": 1,
+      "inline_math": 3,
+      "links": 28
     },
     {
       "page": "almt.html",
