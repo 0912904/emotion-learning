@@ -180,5 +180,19 @@
     "name": "SimCLR",
     "group": "common",
     "summary": "SimCLR 将同一图像的两种增强视图作为正例，用对比目标学习表示；真正关键的是增强定义、投影头、归一化与评价协议，而不是仅记住“拉近正样本、推远负样本”。"
+  },
+  {
+    "id": "P37",
+    "slug": "agent-mer",
+    "name": "Agent-MER",
+    "group": "fine",
+    "summary": "Agent-MER 用情绪树组织候选词，按三级从粗到细推理，再用多轮投票汇总标签。"
+  },
+  {
+    "id": "P38",
+    "slug": "affectgpt-rl",
+    "name": "AffectGPT-RL",
+    "group": "fine",
+    "summary": "先做监督训练，再用情绪轮评分训练模型。对比重点是奖励、输出长度和显式推理的作用。"
   }
 ]
